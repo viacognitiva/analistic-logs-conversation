@@ -28,8 +28,8 @@
     var dbname = 'bdviacognitiva';
 
     // Initialize the library with my account.
-    var cloudant = Cloudant({url: cloudant_url,account:user,password:password});
-    db = cloudant.db.use(dbname);
+    var cloudantDB = Cloudant({url: cloudant_url,account:user,password:password});
+    db = cloudantDB.db.use(dbname);
 
     var cloudant = {
         get : function(req, res) {
@@ -45,10 +45,10 @@
            var dataNow = new Date().toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
 
            if(req.body.aplicacao=='abrale'){
-              db = cloudant.db.use('log-abrale');
+              db = cloudantDB.db.use('log-abrale');
            }
            else if(req.body.aplicacao=='showlivre'){
-               db = cloudant.db.use('log-showlivre');
+               db = cloudantDB.db.use('log-showlivre');
            }
 
            db.insert({aplicacao:req.body.aplicacao, conversation_id: req.body.conversation_id, messageWatson: req.body.messageWatson,messageUser:req.body.messageUser,intencao:req.body.intencao, data : dataNow }, 'doc_'+req.body.conversation_id+'_'+new Date().getTime(), function(err, body, header) {
