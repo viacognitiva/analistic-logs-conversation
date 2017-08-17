@@ -53,7 +53,7 @@ app.get('/api/cloudant/:id', function (req, res) {
     cloudant.get(req, res);
 });
 
-app.post('/api/cloudant', function (req, res) {
+app.post('/api/logs', function (req, res) {
     console.log("Chamando serviço insert no cloudant ");
     cloudant.insertLogs(req, res);
 });
