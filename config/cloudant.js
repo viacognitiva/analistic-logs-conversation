@@ -43,6 +43,14 @@
         //  console.dir(req);
           // var dataNow = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
            var dataNow = new Date().toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
+
+           if(req.body.aplicacao=='abrale'){
+              db = cloudant.db.use('log-abrale');
+           }
+           else if(req.body.aplicacao=='showlivre'){
+               db = cloudant.db.use('log-showlivre');
+           }
+
            db.insert({aplicacao:req.body.aplicacao, conversation_id: req.body.conversation_id, messageWatson: req.body.messageWatson,messageUser:req.body.messageUser,intencao:req.body.intencao, data : dataNow }, 'doc_'+req.body.conversation_id+'_'+new Date().getTime(), function(err, body, header) {
               if (err) {
                   return console.log('[db.insert] ', err.message);
