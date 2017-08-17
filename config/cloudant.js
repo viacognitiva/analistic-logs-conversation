@@ -51,7 +51,7 @@
                db = cloudantDB.db.use('log-showlivre');
            }
 
-           db.insert({aplicacao:req.body.aplicacao, conversation_id: req.body.conversation_id, messageWatson: req.body.messageWatson,messageUser:req.body.messageUser,intencao:req.body.intencao, data : dataNow }, 'doc_'+req.body.conversation_id+'_'+new Date().getTime(), function(err, body, header) {
+           db.insert({ conversation_id: req.body.conversation_id, messageWatson: req.body.messageWatson,messageUser:req.body.messageUser,intencao:req.body.intencao, data : dataNow }, 'doc_'+req.body.conversation_id+'_'+new Date().getTime(), function(err, body, header) {
               if (err) {
                   return console.log('[db.insert] ', err.message);
               }
