@@ -41,9 +41,8 @@
       }, insertLogs : function (req, res) {
           // insert a log document in it.
         //  console.dir(req);
-          console.log("horario "+new Date().toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"}));
           // var dataNow = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-          var dataNow = new Date().toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
+           var dataNow = new Date().toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
            db.insert({aplicacao:req.body.aplicacao, conversation_id: req.body.conversation_id, messageWatson: req.body.messageWatson,messageUser:req.body.messageUser,intencao:req.body.intencao, data : dataNow }, 'doc_'+req.body.conversation_id+'_'+new Date().getTime(), function(err, body, header) {
               if (err) {
                   return console.log('[db.insert] ', err.message);
