@@ -38,6 +38,8 @@ app.controller('myController', ['$scope', '$log', '$http','$filter', function($s
 
                  });
 
+                 console.log('size data '+retorno.length);
+
                   $scope.items = retorno;
 
 
