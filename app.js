@@ -11,6 +11,8 @@ var cfenv = require('cfenv');
 
 var cloudant = require('./config/cloudant.js');
 
+var logconversation = require('./config/logconversation.js');
+
 var auth = require('./routes/auth.js');
 
 var validateRequest = require('./config/validateRequest.js');
@@ -25,7 +27,7 @@ var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
@@ -51,6 +53,10 @@ app.post('/listalogs', routes.textToSpeech);
 //http://localhost:9000/api/cloudant/viacognitiva
 app.get('/api/cloudant/:id', function (req, res) {
     cloudant.get(req, res);
+});
+
+app.get('/api/logconversation', function (req, res) {
+    logconversation.get(req, res);
 });
 
 app.post('/api/logs', function (req, res) {
