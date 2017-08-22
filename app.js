@@ -48,7 +48,7 @@ app.get('/', routes.login);
 
 app.post('/login', auth.login);
 
-app.post('/listalogs', routes.textToSpeech);
+app.post('/listalogs', routes.listalogs);
 
 //http://localhost:9000/api/cloudant/viacognitiva
 app.get('/api/cloudant/:id', function (req, res) {
