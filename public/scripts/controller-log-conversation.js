@@ -21,16 +21,21 @@ app.controller('myController', ['$scope', '$log', '$http','$filter', function($s
                      var jsonParam = {};
                       angular.forEach(item.response.entities, function(ent){
                            jsonParam.entidade = ent.entity;
-                           jsonParam.confidenceEntidade = ent.confidence;
+                           jsonParam.confidenceEntidade = (ent.confidence*100).toFixed(1)+" %";
                       });
                       angular.forEach(item.response.intents, function(int){
                          jsonParam.intencao = int.intent;
-                         jsonParam.confidenceIntencao = int.confidence;
+                         jsonParam.confidenceIntencao = (int.confidence*100).toFixed(1) +" %";
                       });
 
-                       angular.forEach(item.response.input, function(text){
+                      angular.forEach(item.response.input, function(text){
                                  if(text.length!=0)jsonParam.msgUser = text;
-                        });
+                       });
+
+                      if(item.response.context.conversation_id.length!=0){
+                        jsonParam.conversation_id = item.response.context.conversation_id;
+                        jsonParam.data = item.response_timestamp;
+                      }
 
                      if(!angular.equals(jsonParam, {})){
                         retorno.push(jsonParam);
