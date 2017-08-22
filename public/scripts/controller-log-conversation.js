@@ -34,7 +34,9 @@ app.controller('myController', ['$scope', '$log', '$http','$filter', function($s
 
                       if(item.response.context.conversation_id.length!=0){
                         jsonParam.conversation_id = item.response.context.conversation_id;
-                        jsonParam.data = item.response_timestamp;
+                        jsonParam.data = $filter('date')(item.response_timestamp, "dd-MM-yyyy HH:mm:ss");
+
+
                       }
 
                      if(!angular.equals(jsonParam, {})){
