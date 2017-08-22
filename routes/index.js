@@ -11,8 +11,8 @@ module.exports = {
     login : function(req,res){
             res.render('login.html');
     },
-    textToSpeech : function(req,res){
-                res.render('listaLogs.html');
+    listalogs : function(req,res){
+                res.render('listalogs.html');
      }
 }
 
