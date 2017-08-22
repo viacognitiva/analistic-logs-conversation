@@ -41,9 +41,9 @@
             <div class="box-body">
                 <div >
                    <button ng-click="buscar()" class="btn btn-info pull-right">Buscar</button>
+                    <button ng-click="aplicar()" class="btn btn-info pull-right">Aplicar</button>
 
                 </div>
-
             </div>
 
             <form>
@@ -56,9 +56,10 @@
             </form>
 
             <table class="table table-bordered table-striped">
-
                 <thead>
                 <tr>
+                    <td><a href="#" >##</a>
+                    </td>
                     <td>
                         <a href="#" ng-click="sort_by('conversation_id')">
                             Conversation ID
@@ -112,30 +113,25 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="item in items | orderBy:sortType:sortReverse | filter:searchFish">
+                <tr ng-repeat="item in (filteredItems = (items | orderBy:sortType:sortReverse | filter:searchFish ))"  >
+                    <td>
+                        <input type="checkbox" name="selectedItem[]"  value="{{item.id}}" ng-checked="selection.indexOf(item.id) > -1" ng-click="toggleSelection(item.id)">
+                    </td>
                     <td>{{item.conversation_id}}</td>
                     <td>{{item.msgUser}}</td>
                     <td>{{item.confidenceIntencao}}</td>
                     <td>{{item.intencao}}</td>
                     <td>{{item.confidenceEntidade}}</td>
                     <td>{{item.entidade}}</td>
-                    <td>{{item.data}}</td>
+                    <!--<td>{{item.data}}</td>-->
+                    <td>{{item.id}}</td>
                 </tr>
                 </tbody>
-
-
-
-
-
             </table>
-
-
         </div>
-
         <!-- /.box-body -->
   </div>
 </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
     <script type="text/javascript" src="/scripts/controller-log-conversation.js"></script>
