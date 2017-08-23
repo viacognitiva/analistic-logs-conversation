@@ -1,15 +1,17 @@
 
-var app = angular.module('MinhaApp', []);
+var app = angular.module('MinhaApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('myController', ['$scope', '$log', '$http','$filter', function($scope, $log, $http,$filter) {
+app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal', function($scope, $log, $http,$filter,$uibModal) {
 
             $scope.sortType     = 'name'; // set the default sort type
             $scope.sortReverse  = false;  // set the default sort order
             $scope.searchFish   = '';     // set the default search/filter term
 
             $scope.buscar = function() {
-                $http.get('/api/logconversation').success(function(data) {
+                $http.get('/api/logconversation').then(function(response) {
                    var retorno = [];
+
+                   var data = response.data;
                    console.log('data '+data);
                     var pos = 0;
 
@@ -83,5 +85,62 @@ app.controller('myController', ['$scope', '$log', '$http','$filter', function($s
                   });
              };
 
+
+            $scope.name = "Wallace";
+            var $ctrl = this;
+            $scope.modalEntidade = function(size) {
+
+                     $uibModal.open({
+                         scope: $scope,
+                         animation: true,
+                         controllerAs: '$ctrl',
+                         // Esse vai exibir o nome do scope atual
+                         templateUrl: 'myModalEntidade.html',
+                         controller: 'ModalInstanceCtrl',
+                         windowClass: 'custom-dialog',
+                         backdrop:false,
+                         size: size,
+                     });
+             };
+
+
+             $scope.modalIntencao = function(size) {
+
+                                  $uibModal.open({
+                                      scope: $scope,
+                                      animation: true,
+                                      controllerAs: '$ctrl',
+                                      // Esse vai exibir o nome do scope atual
+                                      templateUrl: 'myModalIntencao.html',
+                                      controller: 'ModalInstanceCtrl',
+                                      windowClass: 'custom-dialog',
+                                      backdrop:false,
+                                      size: size,
+                                  });
+              };
+
+
+
+}]);
+
+app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance',function ($scope, $uibModalInstance) {
+         console.log('ModalInstanceCtrl');
+        var $ctrl = this;
+        $ctrl.ok = function() {
+                  alert('OK');
+                //$uibModalInstance.close($scope.selected.item);
+            };
+
+        $ctrl.cancel = function() {
+            // $uibModalInstance.dismiss('cancel');
+             $uibModalInstance.close(false);
+        };
+
+
+        $ctrl.cars = [
+            {model : "Ford Mustang", color : "red"},
+            {model : "Fiat 500", color : "white"},
+            {model : "Volvo XC90", color : "black"}
+        ];
 }]);
 

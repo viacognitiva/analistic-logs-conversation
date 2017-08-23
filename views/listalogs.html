@@ -11,13 +11,18 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://almsaeedstudio.com/themes/AdminLTE/dist/css/AdminLTE.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
     <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/skins/_all-skins.min.css">
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style type="text/css">
+      .custom-dialog .modal-dialog {
+            width :20%;
+            min-width: 600px;
+        }
+    </style>
 
 </head>
 <!--<body class="hold-transition skin-blue sidebar-mini">-->
@@ -42,7 +47,8 @@
                 <div >
                    <button ng-click="buscar()" class="btn btn-info pull-right">Buscar</button>
                     <button ng-click="aplicar()" class="btn btn-info pull-right">Aplicar</button>
-
+                    <button ng-click="modalEntidade('lg')" class="btn btn-info pull-right">Definir Entidade</button>
+                    <button ng-click="modalIntencao('lg')" class="btn btn-info pull-right">Definir Intenção</button>
                 </div>
             </div>
 
@@ -132,8 +138,55 @@
         <!-- /.box-body -->
   </div>
 </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
+ <div ng-controller="ModalInstanceCtrl">
+    <script type="text/ng-template" id="myModalEntidade.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Selecione a entidade</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+
+            <div class="form-group">
+                <label> Entidade </label>
+                <select ng-model="selectedCar" class="form-control">
+                    <option ng-repeat="x in $ctrl.cars" value="{{x.model}}">{{x.model}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </script>
+     <script type="text/ng-template" id="myModalIntencao.html">
+         <div class="modal-header">
+             <h3 class="modal-title" id="modal-title1">Selecione a intenção</h3>
+         </div>
+         <div class="modal-body" id="modal-body1">
+             <div class="form-group">
+                 <label>Intenção</label>
+                 <select ng-model="selectedCar" class="form-control">
+                     <option ng-repeat="x in $ctrl.cars" value="{{x.model}}">{{x.model}}</option>
+                 </select>
+             </div>
+         </div>
+         <div class="modal-footer">
+             <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+         </div>
+     </script>
+
+ </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-sanitize.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+
     <script type="text/javascript" src="/scripts/controller-log-conversation.js"></script>
+<!-- <script type="text/javascript" src="/scripts/controller-log-conversation.js"></script>-->
 </body>
 </html>
