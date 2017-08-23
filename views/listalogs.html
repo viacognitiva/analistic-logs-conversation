@@ -45,6 +45,7 @@
                     <button ng-click="modalIntencao('lg')" class="btn btn-info pull-right">Definir Intenção</button>
                 </div>
             </div>
+            <div class="alert alert-danger" role="alert" ng-if="errorMessage">{{errorMessage}}</div>
 
             <form>
                 <div class="form-group">
