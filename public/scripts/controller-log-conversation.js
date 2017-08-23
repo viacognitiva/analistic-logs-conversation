@@ -50,6 +50,12 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                       $scope.items = retorno;
                       $scope.filteredItems = retorno;
 
+                       if(retorno.length==0 ){
+                            $scope.errorMessage='Registro não encontrado.';
+                        } else {
+                            $scope.errorMessage='';
+                        }
+
                  });
             }
 
