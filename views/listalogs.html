@@ -17,12 +17,6 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <style type="text/css">
-      .custom-dialog .modal-dialog {
-            width :20%;
-            min-width: 600px;
-        }
-    </style>
 
 </head>
 <!--<body class="hold-transition skin-blue sidebar-mini">-->
@@ -60,7 +54,7 @@
                     </div>
                 </div>
             </form>
-
+            <div class="box-body">
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -134,6 +128,7 @@
                 </tr>
                 </tbody>
             </table>
+            </div>
         </div>
         <!-- /.box-body -->
   </div>
@@ -187,6 +182,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
 
     <script type="text/javascript" src="/scripts/controller-log-conversation.js"></script>
-<!-- <script type="text/javascript" src="/scripts/controller-log-conversation.js"></script>-->
+
+    <script type="text/javascript">
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+        jQuery(document).ready(function($){
+            if(!isMobile) {
+              $( "<style>.custom-dialog .modal-dialog { width :20%; min-width: 600px;}</style>" ).appendTo( "head" );
+            }
+        });
+   </script>
+
 </body>
 </html>
