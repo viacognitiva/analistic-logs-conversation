@@ -91,8 +91,6 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                   });
              };
 
-
-            $scope.name = "Wallace";
             var $ctrl = this;
             $scope.modalEntidade = function(size,param) {
                      $scope.parametro=param;
@@ -111,18 +109,18 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
 
 
              $scope.modalIntencao = function(size,param) {
-                               $scope.parametro=param;
-                                  $uibModal.open({
-                                      scope: $scope,
-                                      animation: true,
-                                      controllerAs: '$ctrl',
-                                      // Esse vai exibir o nome do scope atual
-                                      templateUrl: 'myModalIntencao.html',
-                                      controller: 'ModalInstanceCtrl',
-                                      windowClass: 'custom-dialog',
-                                      backdrop:false,
-                                      size: size,
-                                  });
+                       $scope.parametro=param;
+                          $uibModal.open({
+                              scope: $scope,
+                              animation: true,
+                              controllerAs: '$ctrl',
+                              // Esse vai exibir o nome do scope atual
+                              templateUrl: 'myModalIntencao.html',
+                              controller: 'ModalInstanceCtrl',
+                              windowClass: 'custom-dialog',
+                              backdrop:false,
+                              size: size,
+                          });
               };
 
 
@@ -130,7 +128,6 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
 }]);
 
 app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',function ($scope, $uibModalInstance,$http) {
-         console.log('ModalInstanceCtrl');
         var $ctrl = this;
         $ctrl.ok = function() {
                   alert('OK');
@@ -141,8 +138,6 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
             // $uibModalInstance.dismiss('cancel');
              $uibModalInstance.close(false);
         };
-
-        console.log('$scope.parametro'+$scope.parametro)
 
         if($scope.parametro=='entidade'){
             $http.get('/api/logconversation/entities').then(function(response) {
@@ -161,26 +156,18 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
             });
        } else if ($scope.parametro=='intencao'){
              $http.get('/api/logconversation/intencoes').then(function(response) {
-                            var retorno = [];
-                            var data = response.data;
-                            var x=0;
-                            angular.forEach(data.intents, function(int){
-                               var jsonParam = {}
-                               jsonParam.id=++x;
-                               jsonParam.descricao=int.intent;
-                               retorno.push(jsonParam);
-                            });
+                    var retorno = [];
+                    var data = response.data;
+                    var x=0;
+                    angular.forEach(data.intents, function(int){
+                       var jsonParam = {}
+                       jsonParam.id=++x;
+                       jsonParam.descricao=int.intent;
+                       retorno.push(jsonParam);
+                    });
 
-                            $ctrl.intencoes = retorno;
-
+                    $ctrl.intencoes = retorno;
                });
        }
-
-
-        /*$ctrl.cars = [
-            {model : "Ford Mustang", color : "red"},
-            {model : "Fiat 500", color : "white"},
-            {model : "Volvo XC90", color : "black"}
-        ];*/
 }]);
 
