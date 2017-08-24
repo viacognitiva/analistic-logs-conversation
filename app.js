@@ -59,6 +59,14 @@ app.get('/api/logconversation', function (req, res) {
     logconversation.get(req, res);
 });
 
+app.get('/api/logconversation/entities', function (req, res) {
+    logconversation.getEntidades(req, res);
+});
+
+app.get('/api/logconversation/intencoes', function (req, res) {
+    logconversation.getIntencoes(req, res);
+});
+
 app.post('/api/logs', function (req, res) {
     console.log("Chamando serviço insert no cloudant ");
     cloudant.insertLogs(req, res);
