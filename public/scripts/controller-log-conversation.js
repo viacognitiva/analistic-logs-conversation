@@ -94,8 +94,8 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
 
             $scope.name = "Wallace";
             var $ctrl = this;
-            $scope.modalEntidade = function(size) {
-
+            $scope.modalEntidade = function(size,param) {
+                     $scope.parametro=param;
                      $uibModal.open({
                          scope: $scope,
                          animation: true,
@@ -110,8 +110,8 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
              };
 
 
-             $scope.modalIntencao = function(size) {
-
+             $scope.modalIntencao = function(size,param) {
+                               $scope.parametro=param;
                                   $uibModal.open({
                                       scope: $scope,
                                       animation: true,
@@ -129,7 +129,7 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
 
 }]);
 
-app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance',function ($scope, $uibModalInstance) {
+app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',function ($scope, $uibModalInstance,$http) {
          console.log('ModalInstanceCtrl');
         var $ctrl = this;
         $ctrl.ok = function() {
@@ -142,11 +142,45 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance',function ($sco
              $uibModalInstance.close(false);
         };
 
+        console.log('$scope.parametro'+$scope.parametro)
 
-        $ctrl.cars = [
+        if($scope.parametro=='entidade'){
+            $http.get('/api/logconversation/entities').then(function(response) {
+                var retorno = [];
+                var data = response.data;
+                var x=0;
+                angular.forEach(data.entities, function(ent){
+                   var jsonParam = {}
+                   jsonParam.id=++x;
+                   jsonParam.descricao=ent.entity;
+                   retorno.push(jsonParam);
+                });
+
+                $ctrl.entidades = retorno;
+
+            });
+       } else if ($scope.parametro=='intencao'){
+             $http.get('/api/logconversation/intencoes').then(function(response) {
+                            var retorno = [];
+                            var data = response.data;
+                            var x=0;
+                            angular.forEach(data.intents, function(int){
+                               var jsonParam = {}
+                               jsonParam.id=++x;
+                               jsonParam.descricao=int.intent;
+                               retorno.push(jsonParam);
+                            });
+
+                            $ctrl.intencoes = retorno;
+
+               });
+       }
+
+
+        /*$ctrl.cars = [
             {model : "Ford Mustang", color : "red"},
             {model : "Fiat 500", color : "white"},
             {model : "Volvo XC90", color : "black"}
-        ];
+        ];*/
 }]);
 

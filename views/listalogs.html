@@ -41,8 +41,8 @@
                 <div >
                    <button ng-click="buscar()" class="btn btn-info pull-right">Buscar</button>
                     <button ng-click="aplicar()" class="btn btn-info pull-right">Aplicar</button>
-                    <button ng-click="modalEntidade('lg')" class="btn btn-info pull-right">Definir Entidade</button>
-                    <button ng-click="modalIntencao('lg')" class="btn btn-info pull-right">Definir Intenção</button>
+                    <button ng-click="modalEntidade('lg','entidade')" class="btn btn-info pull-right">Definir Entidade</button>
+                    <button ng-click="modalIntencao('lg','intencao')" class="btn btn-info pull-right">Definir Intenção</button>
                 </div>
             </div>
             <div class="alert alert-danger" role="alert" ng-if="errorMessage">{{errorMessage}}</div>
@@ -144,7 +144,9 @@
             <div class="form-group">
                 <label> Entidade </label>
                 <select ng-model="selectedCar" class="form-control">
-                    <option ng-repeat="x in $ctrl.cars" value="{{x.model}}">{{x.model}}</option>
+                    <option value="">-- selecione a entidade --</option>
+                    <option ng-repeat="x in $ctrl.entidades" value="{{x.descricao}}">{{x.descricao}}</option>
+
                 </select>
             </div>
         </div>
@@ -161,7 +163,8 @@
              <div class="form-group">
                  <label>Intenção</label>
                  <select ng-model="selectedCar" class="form-control">
-                     <option ng-repeat="x in $ctrl.cars" value="{{x.model}}">{{x.model}}</option>
+                     <option value="">-- selecione a intenção --</option>
+                     <option ng-repeat="x in $ctrl.intencoes" value="{{x.descricao}}">{{x.descricao}}</option>
                  </select>
              </div>
          </div>
