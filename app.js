@@ -67,6 +67,10 @@ app.get('/api/logconversation/intencoes', function (req, res) {
     logconversation.getIntencoes(req, res);
 });
 
+app.post('/api/logconversation/intencao', function (req, res) {
+    logconversation.treinaIntencao(req, res);
+});
+
 app.post('/api/logs', function (req, res) {
     console.log("Chamando serviço insert no cloudant ");
     cloudant.insertLogs(req, res);
