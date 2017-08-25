@@ -132,6 +132,50 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
         $ctrl.ok = function() {
                   alert('OK');
                 //$uibModalInstance.close($scope.selected.item);
+                if($scope.parametro=='intencao'){
+
+                    $ctrl.errorMessage='';
+                    $ctrl.sucessoMessage='';
+                    angular.forEach($scope.selection, function(sel){
+                        console.log('checksboxx'+sel);
+                        angular.forEach($scope.items, function(item){
+                              if(item.id==sel){
+                                console.log('Msg User'+item.msgUser );
+                                console.log('selected '+$scope.selectedCar );
+
+                                var config = {headers : {'Content-Type': 'application/json; charset=utf-8'}}
+
+                                var data = {
+                                              intencao: $scope.selectedCar ,
+                                              message: item.msgUser
+                                            };
+
+                                $http.post('/api/logconversation/intencao', JSON.stringify(data) , config)
+                                   .then(
+                                       function(response){
+                                         // success callback
+                                         console.log('Sucesso '+response);
+                                         if(response.status==200){
+                                            if(response.data.error){
+                                                $ctrl.errorMessage=""+response.data.error;
+                                            }else {
+                                                $ctrl.sucessoMessage="Intenção associada com sucesso.";
+                                            }
+                                         }
+                                       },
+                                       function(response){
+                                         // failure callback
+                                         console.log('Erro '+response);
+                                         $ctrl.errorMessage="Error"+response;
+                                       }
+                                    );
+
+                              }//fim do if
+                         });
+                     });
+                    //alert('OK');
+                }
+
             };
 
         $ctrl.cancel = function() {
@@ -156,18 +200,18 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
             });
        } else if ($scope.parametro=='intencao'){
              $http.get('/api/logconversation/intencoes').then(function(response) {
-                    var retorno = [];
-                    var data = response.data;
-                    var x=0;
-                    angular.forEach(data.intents, function(int){
-                       var jsonParam = {}
-                       jsonParam.id=++x;
-                       jsonParam.descricao=int.intent;
-                       retorno.push(jsonParam);
-                    });
+                var retorno = [];
+                var data = response.data;
+                var x=0;
+                angular.forEach(data.intents, function(int){
+                   var jsonParam = {}
+                   jsonParam.id=++x;
+                   jsonParam.descricao=int.intent;
+                   retorno.push(jsonParam);
+                });
 
-                    $ctrl.intencoes = retorno;
-               });
+                $ctrl.intencoes = retorno;
+            });
        }
 }]);
 

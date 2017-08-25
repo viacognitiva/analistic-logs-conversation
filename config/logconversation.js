@@ -59,8 +59,50 @@ const apiHostname = 'gateway.watsonplatform.net';
                      res.status(200).json(JSON.parse(body));
 
              });
-    }
+    },
+    treinaIntencao : function(req, res) {
+          const intent =  req.body.intencao;
+          const baseQuery = `/conversation/api/v1/workspaces/${workspacesId}/intents/${intent}/examples`;
+          const version = 'version=2017-05-26';
 
+          const fullUrl = `https://${username}:${password}@${apiHostname}${baseQuery}?${version}`;
+          console.log(fullUrl);
+
+          request.post({
+              headers: { "Content-Type": "application/json"},
+              url:     fullUrl,
+              body:  { "text":req.body.message},
+              json:true
+          }, function(err,resp,body){
+                  if(err){
+                      console.log(" logConversation.treinaIntencao Error: "+body);
+                   }
+                 res.status(200).json(body);
+                // res.status(200).json(JSON.parse(body));
+          });
+    },
+    treinaEntidade : function(req, res) {
+
+          const entidade=  'Resposta';
+          const baseQuery = `/conversation/api/v1/workspaces/${workspacesId}/intents/${intent}/examples`;
+          const version = 'version=2017-05-26';
+
+          const fullUrl = `https://${username}:${password}@${apiHostname}${baseQuery}?${version}`;
+          console.log(fullUrl);
+
+          request.post({
+              headers: { "Content-Type": "application/json"},
+              url:     fullUrl,
+              body:  { "text":"quero escutar Rock in Roll"},
+              json:true
+          }, function(err,resp,body){
+                  if(err){
+                      console.log(" logConversation.treinaIntencao Error: "+JSON.parse(body));
+                   }
+                 res.status(200).json(body);
+                // res.status(200).json(JSON.parse(body));
+          });
+    }
 }
 
 

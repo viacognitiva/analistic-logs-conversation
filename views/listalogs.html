@@ -166,6 +166,8 @@
                      <option value="">-- selecione a intenção --</option>
                      <option ng-repeat="x in $ctrl.intencoes" value="{{x.descricao}}">{{x.descricao}}</option>
                  </select>
+                 <div class="alert alert-success" role="alert" ng-if="$ctrl.sucessoMessage">{{$ctrl.sucessoMessage}}</div>
+                 <div class="alert alert-danger" role="alert" ng-if="$ctrl.errorMessage">{{$ctrl.errorMessage}}</div>
              </div>
          </div>
          <div class="modal-footer">
