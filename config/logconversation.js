@@ -83,8 +83,8 @@ const apiHostname = 'gateway.watsonplatform.net';
     },
     treinaEntidade : function(req, res) {
 
-          const entidade=  'Resposta';
-          const baseQuery = `/conversation/api/v1/workspaces/${workspacesId}/intents/${intent}/examples`;
+          const entity =  req.body.entidade;
+          const baseQuery = `/conversation/api/v1/workspaces/${workspacesId}/entities/${entity}/values`;
           const version = 'version=2017-05-26';
 
           const fullUrl = `https://${username}:${password}@${apiHostname}${baseQuery}?${version}`;
@@ -93,11 +93,13 @@ const apiHostname = 'gateway.watsonplatform.net';
           request.post({
               headers: { "Content-Type": "application/json"},
               url:     fullUrl,
-              body:  { "text":"quero escutar Rock in Roll"},
+              body:  {"value": req.body.message,
+                      "metadata": {},
+                     },
               json:true
           }, function(err,resp,body){
                   if(err){
-                      console.log(" logConversation.treinaIntencao Error: "+JSON.parse(body));
+                      console.log(" logConversation.treinaIntencao Error: "+body);
                    }
                  res.status(200).json(body);
                 // res.status(200).json(JSON.parse(body));

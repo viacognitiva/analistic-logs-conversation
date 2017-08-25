@@ -129,24 +129,33 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
 
 app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',function ($scope, $uibModalInstance,$http) {
         var $ctrl = this;
+
+        limpar();
+
+        function limpar() {
+           $ctrl.errorMessage='';
+           $ctrl.sucessoMessage='';
+        }
+
         $ctrl.ok = function() {
                   alert('OK');
+                   limpar();
                 //$uibModalInstance.close($scope.selected.item);
                 if($scope.parametro=='intencao'){
-
-                    $ctrl.errorMessage='';
-                    $ctrl.sucessoMessage='';
+                   if($scope.selection.length==0){
+                     $ctrl.errorMessage="Selecione na tabela algum registro.";
+                   }else{
                     angular.forEach($scope.selection, function(sel){
                         console.log('checksboxx'+sel);
                         angular.forEach($scope.items, function(item){
                               if(item.id==sel){
                                 console.log('Msg User'+item.msgUser );
-                                console.log('selected '+$scope.selectedCar );
+                                console.log('selected '+$scope.selectedIntencao );
 
                                 var config = {headers : {'Content-Type': 'application/json; charset=utf-8'}}
 
                                 var data = {
-                                              intencao: $scope.selectedCar ,
+                                              intencao: $scope.selectedIntencao ,
                                               message: item.msgUser
                                             };
 
@@ -173,17 +182,66 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
                               }//fim do if
                          });
                      });
-                    //alert('OK');
+                   }//fim do else
                 }
+
+
+                if($scope.parametro=='entidade'){
+
+                           if($scope.selection.length==0){
+                             $ctrl.errorMessage="Selecione na tabela algum registro.";
+                           }else{
+                            angular.forEach($scope.selection, function(sel){
+                                console.log('checksboxx'+sel);
+                                angular.forEach($scope.items, function(item){
+                                      if(item.id==sel){
+                                        console.log('Msg User'+item.msgUser );
+                                        console.log('selected '+$scope.selectedEntidade );
+
+                                        var config = {headers : {'Content-Type': 'application/json; charset=utf-8'}}
+
+                                        var data = {
+                                                      entidade: $scope.selectedEntidade ,
+                                                      message: item.msgUser
+                                                    };
+
+                                        $http.post('/api/logconversation/entidade', JSON.stringify(data) , config)
+                                           .then(
+                                               function(response){
+                                                 // success callback
+                                                 console.log('Sucesso '+response);
+                                                 if(response.status==200){
+                                                    if(response.data.error){
+                                                        $ctrl.errorMessage=""+response.data.error;
+                                                    }else {
+                                                        $ctrl.sucessoMessage="Intenção associada com sucesso.";
+                                                    }
+                                                 }
+                                               },
+                                               function(response){
+                                                 // failure callback
+                                                 console.log('Erro '+response);
+                                                 $ctrl.errorMessage="Error"+response;
+                                               }
+                                            );
+
+                                      }//fim do if
+                                 });
+                             });
+                           }//fim do else
+                        }
+
 
             };
 
         $ctrl.cancel = function() {
             // $uibModalInstance.dismiss('cancel');
              $uibModalInstance.close(false);
+             limpar();
         };
 
         if($scope.parametro=='entidade'){
+             limpar();
             $http.get('/api/logconversation/entities').then(function(response) {
                 var retorno = [];
                 var data = response.data;

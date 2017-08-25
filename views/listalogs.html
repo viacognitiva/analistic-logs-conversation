@@ -143,11 +143,12 @@
 
             <div class="form-group">
                 <label> Entidade </label>
-                <select ng-model="selectedCar" class="form-control">
+                <select ng-model="selectedEntidade" class="form-control">
                     <option value="">-- selecione a entidade --</option>
                     <option ng-repeat="x in $ctrl.entidades" value="{{x.descricao}}">{{x.descricao}}</option>
-
                 </select>
+                <div class="alert alert-success" role="alert" ng-if="$ctrl.sucessoMessage">{{$ctrl.sucessoMessage}}</div>
+                <div class="alert alert-danger" role="alert" ng-if="$ctrl.errorMessage">{{$ctrl.errorMessage}}</div>
             </div>
         </div>
         <div class="modal-footer">
@@ -162,7 +163,7 @@
          <div class="modal-body" id="modal-body1">
              <div class="form-group">
                  <label>Intenção</label>
-                 <select ng-model="selectedCar" class="form-control">
+                 <select ng-model="selectedIntencao" class="form-control">
                      <option value="">-- selecione a intenção --</option>
                      <option ng-repeat="x in $ctrl.intencoes" value="{{x.descricao}}">{{x.descricao}}</option>
                  </select>
