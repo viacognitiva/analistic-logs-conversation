@@ -8,6 +8,8 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
             $scope.searchFish   = '';     // set the default search/filter term
 
             $scope.buscar = function() {
+
+                $scope.loading = true;
                 $http.get('/api/logconversation').then(function(response) {
                    var retorno = [];
 
@@ -50,11 +52,13 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                       $scope.items = retorno;
                       $scope.filteredItems = retorno;
 
-                       if(retorno.length==0 ){
+                      if(retorno.length==0 ){
                             $scope.errorMessage='Registro não encontrado.';
-                        } else {
+                      } else {
                             $scope.errorMessage='';
-                        }
+                      }
+
+                      $scope.loading = false;
 
                  });
             }
@@ -272,4 +276,21 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
             });
        }
 }]);
+
+
+app.directive('loading', function () {
+      return {
+        restrict: 'E',
+        replace:true,
+        template: '<div class="loading"><img src="/images/ajax-loader.gif" width="20" height="20" /> Aguarde ...</div>',
+        link: function (scope, element, attr) {
+              scope.$watch('loading', function (val) {
+                  if (val)
+                      $(element).show();
+                  else
+                      $(element).hide();
+              });
+        }
+      }
+  })
 
