@@ -75,6 +75,15 @@ app.post('/api/logconversation/entidade', function (req, res) {
     logconversation.treinaEntidade(req, res);
 });
 
+app.post('/api/logconversation/entidade/synonyms', function (req, res) {
+    logconversation.criarSinonimo(req, res);
+});
+
+app.get('/api/logconversation/entidade/value/:entity', function (req, res) {
+    console.dir(req);
+    logconversation.getEntidadeValue(req, res);
+});
+
 app.post('/api/logs', function (req, res) {
     console.log("Chamando serviço insert no cloudant ");
     cloudant.insertLogs(req, res);
