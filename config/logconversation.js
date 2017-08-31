@@ -93,7 +93,7 @@ const apiHostname = 'gateway.watsonplatform.net';
           request.post({
               headers: { "Content-Type": "application/json"},
               url:     fullUrl,
-              body:  {"value": req.body.message,
+              body:  {"value": req.body.valor,
                       "metadata": {},
                      },
               json:true
@@ -104,7 +104,50 @@ const apiHostname = 'gateway.watsonplatform.net';
                  res.status(200).json(body);
                 // res.status(200).json(JSON.parse(body));
           });
-    }
+    },
+     getEntidadeValue : function(req, res) {
+
+           const entity=req.params.entity;
+            const baseQuery = `/conversation/api/v1/workspaces/${workspacesId}/entities/${entity}/values`;
+            const version = 'version=2017-05-26&export=false&include_count=false';
+
+            const fullUrl = `https://${username}:${password}@${apiHostname}${baseQuery}?${version}`;
+            console.log(fullUrl);
+            request.get(fullUrl,function(err,resp,body){
+                  if(err){
+                     console.log(" logConversation.getEntidadeValue Error: "+JSON.parse(body));
+                  }
+                  res.status(200).json(JSON.parse(body));
+
+          });
+
+     },
+     criarSinonimo : function(req, res) {
+
+             const entity =  req.body.entidade;
+             const value =  req.body.valor;
+
+             const baseQuery = `/conversation/api/v1/workspaces/${workspacesId}/entities/${entity}/values/${value}/synonyms`;
+             const version = 'version=2017-05-26';
+
+             const fullUrl = `https://${username}:${password}@${apiHostname}${baseQuery}?${version}`;
+             console.log(fullUrl);
+
+             request.post({
+                 headers: { "Content-Type": "application/json"},
+                 url:     fullUrl,
+                 body:  {"synonym": req.body.sinonimo
+                        },
+                 json:true
+             }, function(err,resp,body){
+                     if(err){
+                         console.log(" logConversation.criarSinonimoo Error: "+body);
+                      }
+                    res.status(200).json(body);
+                   // res.status(200).json(JSON.parse(body));
+             });
+     }
+
 }
 
 
