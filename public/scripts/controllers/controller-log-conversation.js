@@ -4,8 +4,9 @@ var app = angular.module('MinhaApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']
 app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal', function($scope, $log, $http,$filter,$uibModal) {
 
             $scope.sortType     = 'name'; // set the default sort type
-            $scope.sortReverse  = false;  // set the default sort order
+            $scope.sortReverse  = true;  // set the default sort order
             $scope.searchFish   = '';     // set the default search/filter term
+
 
             $scope.buscar = function() {
 
@@ -21,11 +22,13 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                          var jsonParam = {};
                           angular.forEach(item.response.entities, function(ent){
                                jsonParam.entidade = ent.entity;
-                               jsonParam.confidenceEntidade = (ent.confidence*100).toFixed(1)+" %";
+                               //jsonParam.confidenceEntidade = (ent.confidence*100).toFixed(1)+" %";
+                               jsonParam.confidenceEntidade = ent.confidence.toFixed(4)*100 ;
                           });
                           angular.forEach(item.response.intents, function(int){
                              jsonParam.intencao = int.intent;
-                             jsonParam.confidenceIntencao = (int.confidence*100).toFixed(1) +" %";
+                            // jsonParam.confidenceIntencao = (int.confidence*100).toFixed(1) +" %";
+                            jsonParam.confidenceIntencao = int.confidence.toFixed(4)*100 ;
                           });
 
                           angular.forEach(item.response.input, function(text){
@@ -61,10 +64,14 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                       $scope.loading = false;
 
                  });
-            }
+             }
+
+             $scope.isNumber = angular.isNumber;
 
              $scope.sort_by = function(newSortingOrder) {
-                   $scope.sortType = newSortingOrder; $scope.sortReverse = !$scope.sortReverse;
+                   $scope.sortReverse = ($scope.sortType === newSortingOrder) ? !$scope.sortReverse : false;
+                   $scope.sortType = newSortingOrder;
+
              };
 
              $scope.showDown = function(newSortingOrder) {
