@@ -134,6 +134,21 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                           });
               };
 
+               $scope.modalAdmWorkspace = function(size,param) {
+                                     $scope.parametro=param;
+                                        $uibModal.open({
+                                            scope: $scope,
+                                            animation: true,
+                                            controllerAs: '$ctrl',
+                                            // Esse vai exibir o nome do scope atual
+                                            templateUrl: 'myModalAdmWorkspace.html',
+                                            controller: 'ModalInstanceCtrl',
+                                            windowClass: 'custom-dialog',
+                                            backdrop:false,
+                                            size: size,
+                                        });
+                };
+
 
 }]);
 
