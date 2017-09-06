@@ -85,8 +85,13 @@
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
                                 <li>
-                                    <a id="link-1" href  ng-click="modalAdmWorkspace('lg','entidade')" >
-                                        <i class="fa fa-wrench fa-fw"></i> Gerenciar workspace
+                                    <a id="link-1" href  ng-click="modalConfigWorkspace('lg','entidade')" >
+                                        <i class="fa fa-wrench fa-fw"></i> Criar nova workspace
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="link-2" href  ng-click="modalCriarWorkspace('lg','configworkspace')" >
+                                        <i class="fa fa-wrench fa-fw"></i> Configurar nova workspace
                                     </a>
                                 </li>
                                 <li>
@@ -288,32 +293,63 @@
 
     <script type="text/ng-template" id="myModalAdmWorkspace.html">
         <div class="register-box-body">
-            <p class="login-box-msg">Configurar uma nova workspace</p>
+            <p class="login-box-msg">Criar uma nova workspace</p>
 
-            <form action="../../index.html" method="post">
+
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="Full name">
+                    <input type="text" ng-model="nome" class="form-control" placeholder="nome">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="text" ng-model="workspaceId" class="form-control" placeholder="workspace id">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="text" ng-model="username" class="form-control" placeholder="Username">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password"  ng-model="password" class="form-control" placeholder="Password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-                <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Retype password">
-                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-                </div>
-
-            </form>
+                <div class="alert alert-success" role="alert" ng-if="$ctrl.sucessoMessage">{{$ctrl.sucessoMessage}}</div>
+                <div class="alert alert-danger" role="alert" ng-if="$ctrl.errorMessage">{{$ctrl.errorMessage}}</div>
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" >Salvar</button>
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.saveWorkspace()" >Salvar</button>
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Fechar</button>
+        </div>
+    </script>
+
+
+    <script type="text/ng-template" id="myModalConfigWorkspace.html">
+        <div class="register-box-body">
+        <p class="login-box-msg">Configure uma nova workspace</p>
+        <div class="modal-body" id="modal-body3">
+            <div class="form-group">
+                <label>workspace</label>
+                <select ng-model="selectedWorkspace" class="form-control" ng-change="$ctrl.onchangeWorkspace()">
+                    <option value="">-- selecione a workspace --</option>
+                    <option ng-repeat="x in $ctrl.workspacesValues" value="{{x.id}}">{{x.nome}}</option>
+                </select>
+                <br>
+                <label>Detalhes:</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="$ctrl.itemWorksapceSelected.nome"><br>
+                    <input type="text" class="form-control" ng-model="$ctrl.itemWorksapceSelected.workspaceId"><br>
+                    <input type="text" class="form-control" ng-model="$ctrl.itemWorksapceSelected.username"><br>
+                    <input type="text" class="form-control" ng-model="$ctrl.itemWorksapceSelected.password"><br>
+
+                    <div>
+                <div class="alert alert-success" role="alert" ng-if="$ctrl.sucessoMessage">{{$ctrl.sucessoMessage}}</div>
+                <div class="alert alert-danger" role="alert" ng-if="$ctrl.errorMessage">{{$ctrl.errorMessage}}</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Salvar</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Fechar</button>
+        </div>
         </div>
     </script>
 

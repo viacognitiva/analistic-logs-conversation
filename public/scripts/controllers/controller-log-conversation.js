@@ -134,7 +134,7 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                           });
               };
 
-               $scope.modalAdmWorkspace = function(size,param) {
+               $scope.modalConfigWorkspace = function(size,param) {
                                      $scope.parametro=param;
                                         $uibModal.open({
                                             scope: $scope,
@@ -148,6 +148,22 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                                             size: size,
                                         });
                 };
+
+
+                $scope.modalCriarWorkspace = function(size,param) {
+                             $scope.parametro=param;
+                                $uibModal.open({
+                                    scope: $scope,
+                                    animation: true,
+                                    controllerAs: '$ctrl',
+                                    // Esse vai exibir o nome do scope atual
+                                    templateUrl: 'myModalConfigWorkspace.html',
+                                    controller: 'ModalInstanceCtrl',
+                                    windowClass: 'custom-dialog',
+                                    backdrop:false,
+                                    size: size,
+                                });
+                 };
 
 
 }]);

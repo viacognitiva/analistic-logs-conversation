@@ -59,7 +59,36 @@
                 //console.log(body);
                 res.status(201).json(body);
             });
-      }
+      }, insertWorkspace : function (req, res) {
+
+         db = cloudantDB.db.use('workspace');
+
+         db.insert({nome:req.body.nome, workspaceId: req.body.workspaceId, username: req.body.username, password: req.body.password, status:'ativo' } , function(err, body, header) {
+               if (err) {
+                   return console.log('[db.insert] ', err.message);
+               }
+                 console.log('Documents is inserted');
+                 //console.log(body);
+                 res.status(201).json(body);
+          });
+      }, listWorkspace : function (req, res) {
+
+              db = cloudantDB.db.use('workspace');
+               db.index( {name:'_id', type:'json', index:{fields:['status']}});
+
+              var query = { selector: { status: 'ativo' }};
+              db.find(query, function(err, data) {
+                  if (err) {
+                         return console.log('[db.listWorkspace] ', err.message);
+                     }
+                       //console.log(body);
+                       res.status(201).json(data);
+
+
+              });
+
+        }
     };
 
 module.exports = cloudant;
+

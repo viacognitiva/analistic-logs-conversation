@@ -211,4 +211,72 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
           }
        };
 
+
+       if ($scope.parametro=='configworkspace'){
+          limpar();
+           $http.get('/api/logconversation/workspace').then(function(response) {
+                  var retorno = [];
+                  var data = response.data;
+                  angular.forEach(data.docs, function(val){
+                     var jsonParam = {}
+                     jsonParam.id=val._id
+                     jsonParam.nome=val.nome;
+                     jsonParam.workspaceId=val.workspaceId;
+                     jsonParam.username=val.username;
+                     jsonParam.password=val.password;
+                     retorno.push(jsonParam);
+                  });
+
+                   $ctrl.workspacesValues = retorno;
+              });
+       }
+
+
+       $ctrl.onchangeWorkspace = function() {
+          try {
+
+               angular.forEach($ctrl.workspacesValues, function(item){
+                     if(item.id==$scope.selectedWorkspace){
+                        $ctrl.itemWorksapceSelected=item;
+                       throw Error();//usado para simular o break, pra não iterar toda lista quando encontrado
+                     }//fim do if
+                });
+
+            } catch(e) {
+                // anything
+            }
+       }
+
+       $ctrl.saveWorkspace = function() {
+
+            var config = {headers : {'Content-Type': 'application/json; charset=utf-8'}};
+
+            var data = {
+                     workspaceId: $scope.workspaceId ,
+                     username: $scope.username ,
+                     password: $scope.password,
+                     nome: $scope.nome};
+
+                $http.post('/api/logconversation/workspace', JSON.stringify(data) , config)
+                    .then(
+                        function(response){
+                          // success callback
+                          console.log('Sucesso '+response);
+                          if(response.status==201){
+                             if(response.data.error){
+                                 $ctrl.errorMessage=""+response.data.error;
+                             }else {
+                                 $ctrl.sucessoMessage="workspace criado com sucesso.";
+                             }
+                          }
+                        },
+                        function(response){
+                          // failure callback
+                          console.log('Erro '+response);
+                          $ctrl.errorMessage="Error"+response;
+                        }
+                     );
+
+       }
+
 }]);
