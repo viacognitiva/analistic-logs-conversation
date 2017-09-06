@@ -89,6 +89,15 @@ app.post('/api/logs', function (req, res) {
     cloudant.insertLogs(req, res);
 });
 
+app.post('/api/logconversation/workspace', function (req, res) {
+    console.log("Chamando serviço insert no cloudant workspace ");
+    cloudant.insertWorkspace(req, res);
+});
+
+app.get('/api/logconversation/workspace', function (req, res) {
+    cloudant.listWorkspace(req, res);
+});
+
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
