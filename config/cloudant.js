@@ -87,7 +87,22 @@
 
               });
 
-        }
+        },
+        getWorkspaceSelecionada : function (req, res) {
+
+              db = cloudantDB.db.use('workspace');
+              db.index( {name:'_id', type:'json', index:{fields:['selecionado']}});
+
+              var query = { selector: { selecionado: 'true' }};
+              db.find(query, function(err, data) {
+                  if (err) {
+                      return console.log('[db.getWorkspaceSelected ] ', err.message);
+                    }
+                   res.status(201).json(data);
+
+              });
+
+         }
     };
 
 module.exports = cloudant;

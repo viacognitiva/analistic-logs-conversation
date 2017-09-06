@@ -1,11 +1,32 @@
 var request=require('request');
-const workspacesId =  '257e3228-66e9-439a-84dd-f295fb4fd403';
-const username = 'd1df6c26-bedc-4965-9a79-e1339c0cff80';
-const password = '3lUqPxo4kNm2';
-const apiHostname = 'gateway.watsonplatform.net';
+
+var workspacesId =  '257e3228-66e9-439a-84dd-f295fb4fd403';
+var username = 'd1df6c26-bedc-4965-9a79-e1339c0cff80';
+var password = '3lUqPxo4kNm2';
+var apiHostname = 'gateway.watsonplatform.net';
+
+
+function mymodule_init(callback){
+       request.get("http://localhost:1000/api/logconversation/workspace/selecionado",function(err,resp,body){
+           var obj = JSON.parse(body);
+           console.log(obj.docs[0]);
+           workspacesId = obj.docs[0].workspaceId;
+           username = obj.docs[0].username;
+           password = obj.docs[0].password;
+           callback(null);
+
+        });
+}
+
+// Run my init:
+mymodule_init(function(){});
+
 
  var logConversation = {
      get : function(req, res) {
+
+       mymodule_init(function(){
+
 
 
         console.log("Buscando log");
@@ -22,6 +43,8 @@ const apiHostname = 'gateway.watsonplatform.net';
               }
               //res.status(200).json(JSON.parse(body));
               res.status(200).json(JSON.parse(body));
+
+        });
 
         });
 

@@ -98,6 +98,10 @@ app.get('/api/logconversation/workspace', function (req, res) {
     cloudant.listWorkspace(req, res);
 });
 
+app.get('/api/logconversation/workspace/selecionado', function (req, res) {
+    cloudant.getWorkspaceSelecionada(req, res);
+});
+
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
