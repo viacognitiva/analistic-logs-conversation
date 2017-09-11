@@ -1,4 +1,7 @@
 var request=require('request');
+var express = require('express');
+var app = express();
+app.set('port', process.env.PORT || 1000);
 
 var workspacesId =  '257e3228-66e9-439a-84dd-f295fb4fd403';
 var username = 'd1df6c26-bedc-4965-9a79-e1339c0cff80';
@@ -7,7 +10,8 @@ var apiHostname = 'gateway.watsonplatform.net';
 
 
 function mymodule_init(callback){
-       request.get("http://localhost:1000/api/logconversation/workspace/selecionado",function(err,resp,body){
+
+       request.get("http://localhost:"+app.get('port')+"/api/logconversation/workspace/selecionado",function(err,resp,body){
            var obj = JSON.parse(body);
            console.log(obj.docs[0]);
            workspacesId = obj.docs[0].workspaceId;
