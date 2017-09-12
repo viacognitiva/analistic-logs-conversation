@@ -27,7 +27,7 @@ var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
 
 // all environments
-app.set('port', process.env.PORT || 1000);
+app.set('port', process.env.PORT || 2000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
@@ -92,6 +92,11 @@ app.post('/api/logs', function (req, res) {
 app.post('/api/logconversation/workspace', function (req, res) {
     console.log("Chamando serviço insert no cloudant workspace ");
     cloudant.insertWorkspace(req, res);
+});
+
+app.put('/api/logconversation/workspace/:id', function (req, res) {
+    console.log("Chamando serviço update no cloudant workspace ");
+    cloudant.updateSelectWorkspace(req, res);
 });
 
 app.get('/api/logconversation/workspace', function (req, res) {

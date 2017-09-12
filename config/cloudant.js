@@ -63,18 +63,18 @@
 
          db = cloudantDB.db.use('workspace');
 
-         db.insert({nome:req.body.nome, workspaceId: req.body.workspaceId, username: req.body.username, password: req.body.password, status:'ativo' } , function(err, body, header) {
+         db.insert({nome:req.body.nome, workspaceId: req.body.workspaceId, username: req.body.username, password: req.body.password, status:'ativo',selecionado: 'false' } , function(err, body, header) {
                if (err) {
                    return console.log('[db.insert] ', err.message);
                }
-                 console.log('Documents is inserted');
+                 console.log('insertWorkspace - Documents is inserted');
                  //console.log(body);
                  res.status(201).json(body);
           });
       }, listWorkspace : function (req, res) {
 
               db = cloudantDB.db.use('workspace');
-               db.index( {name:'_id', type:'json', index:{fields:['status']}});
+              db.index( {name:'_id', type:'json', index:{fields:['status']}});
 
               var query = { selector: { status: 'ativo' }};
               db.find(query, function(err, data) {
@@ -101,6 +101,42 @@
                    res.status(201).json(data);
 
               });
+
+         },
+         updateSelectWorkspace: function (req, res) {
+
+                db = cloudantDB.db.use('workspace');
+                db.index( {name:'_id', type:'json', index:{fields:['status']}});
+
+                var query = { selector: { status: 'ativo' }};
+                db.find(query, function(err, data) {
+                   if (err) {
+                          return console.log('[db.updateSelectWorkspace] ', err.message);
+                      }
+                      var condicao = false;
+                      for(var i = 0; i < data.docs.length;i++){
+                             if(data.docs[i]._id==req.params.id){
+                                  data.docs[i].selecionado='true';
+                                  db.insert(data.docs[i], function(err, data) {
+                                          if (err) return console.log(err.message);
+                                              console.log('update completed: ' + data);
+                                              res.status(200).json(data)
+                                  });
+                             }else {
+                                if(data.docs[i].selecionado=='true'){
+                                     data.docs[i].selecionado='false';
+                                     db.insert(data.docs[i], function(err, data) {
+                                             if (err) return console.log(err.message);
+                                                 console.log('update completed: ' + data);
+                                     });
+
+                                }
+
+                             }
+                      }
+
+               });
+
 
          }
     };

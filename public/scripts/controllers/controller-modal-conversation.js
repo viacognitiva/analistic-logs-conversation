@@ -279,4 +279,33 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
 
        }
 
+
+       $ctrl.configureWorkspace = function() {
+
+                       var config = {headers : {'Content-Type': 'application/json; charset=utf-8'}};
+                       console.log('/api/logconversation/workspace/'+$scope.selectedWorkspace);
+                       $http.put('/api/logconversation/workspace/'+$scope.selectedWorkspace, config)
+                           .then(
+                               function(response){
+                                 // success callback
+                                 console.log('Sucesso '+response);
+                                 if(response.status==200){
+                                    if(response.data.error){
+                                        $ctrl.errorMessage=""+response.data.error;
+                                    }else {
+                                        $ctrl.sucessoMessage="workspace configurado com sucesso.";
+                                    }
+                                 }
+                               },
+                               function(response){
+                                 // failure callback
+                                 console.log('Erro '+response);
+                                 $ctrl.errorMessage="Error"+response;
+                               }
+                            );
+
+              }
+
+
+
 }]);

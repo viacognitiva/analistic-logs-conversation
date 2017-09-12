@@ -1,7 +1,7 @@
 var request=require('request');
 var express = require('express');
 var app = express();
-app.set('port', process.env.PORT || 1000);
+app.set('port', process.env.PORT || 2000);
 
 var workspacesId =  '257e3228-66e9-439a-84dd-f295fb4fd403';
 var username = 'd1df6c26-bedc-4965-9a79-e1339c0cff80';
@@ -11,14 +11,19 @@ var apiHostname = 'gateway.watsonplatform.net';
 
 function mymodule_init(callback){
 
+      console.log("http://localhost:"+app.get('port')+"/api/logconversation/workspace/selecionado");
        request.get("http://localhost:"+app.get('port')+"/api/logconversation/workspace/selecionado",function(err,resp,body){
-           var obj = JSON.parse(body);
-           console.log(obj.docs[0]);
-           workspacesId = obj.docs[0].workspaceId;
-           username = obj.docs[0].username;
-           password = obj.docs[0].password;
-           callback(null);
+           console.log("inicializando .."+body);
 
+           if (typeof body != 'undefined') {
+             var obj = JSON.parse(body);
+              console.log(obj);
+              workspacesId = obj.docs[0].workspaceId;
+              username = obj.docs[0].username;
+              password = obj.docs[0].password;
+
+           }
+           callback(null);
         });
 }
 
