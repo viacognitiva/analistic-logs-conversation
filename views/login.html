@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="MinhaApp">
 <head>
 
        <title>Login</title>
@@ -20,7 +20,7 @@
 
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
+<div ng-controller="userController" class="login-box">
     <div class="login-logo">
         <a href="../../index2.html"><b>Login</b></a>
     </div>
@@ -29,13 +29,13 @@
         <p class="login-box-msg">
             Faça login para iniciar sua sessão</p>
 
-        <form action="/listalogs" method="post">
+        <form >
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="email" ng-model="user" class="form-control" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" ng-model="password" class="form-control" placeholder="Password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -48,7 +48,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+                    <button  ng-click="logar()" class="btn btn-primary btn-block btn-flat">Entrar</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -57,6 +57,7 @@
         <div class="social-auth-links text-center">
            <!-- <a href="#">I forgot my password</a><br>
             <a href="register.html" class="text-center">Register a new membership</a>-->
+            <div class="alert alert-danger" role="alert" ng-if="errorMessage">{{errorMessage}}</div>
         </div>
         <!-- /.social-auth-links -->
     </div>
@@ -70,6 +71,16 @@
 <script src="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="https://adminlte.io/themes/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-animate.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-sanitize.js"></script>
+<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+
+<script type="text/javascript" src="/scripts/controllers/controller-user.js"></script>
+
 <script>
   $(function () {
     $('input').iCheck({

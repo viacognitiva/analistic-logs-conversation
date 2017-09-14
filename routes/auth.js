@@ -1,68 +1,70 @@
 var jwt = require('jwt-simple');
 
+var cloudant = require('../config/cloudant.js');
+
 var auth = {
 
   login: function(req, res) {
 
-   console.log("username"+req.query.username);
-    //console.log("Login"+req.query.password);
-  // console.dir(req);
-    //var username = req.body.username || '';
-    //var password = req.body.password || '';
-
-    var username = req.query.username || '';
-    var password = req.query.password || '';
+    var username = req.body.username || '';
+    var password = req.body.password || '';
 
     if (username == '' || password == '') {
       res.status(401);
       res.json({
         "status": 401,
-        "message": "Invalid credentials"
+        "message": "Entre com o Email e Password."
       });
       return;
     }
 
     // Fire a query to your DB and check if the credentials are valid
-    var dbUserObj = auth.validate(username, password);
+    auth.validate(req, res , function(dbUserObj) {
 
-    if (!dbUserObj) { // If authentication fails, we send a 401 back
-      res.status(401);
-      res.json({
-        "status": 401,
-        "message": "Invalid credentials"
-      });
-      return;
-    }
+      console.log(dbUserObj);
 
-    if (dbUserObj) {
+        if (!dbUserObj) { // If authentication fails, we send a 401 back
+              res.status(401);
+              res.json({
+                "status": 401,
+                "message": "Credencial Inválida."
+              });
+              return;
+         }
 
-      // If authentication is success, we will generate a token
-      // and dispatch it to the client
+         if (dbUserObj) {
+              res.json(genToken(dbUserObj));
+          }
 
-      res.json(genToken(dbUserObj));
-    }
+
+    });
 
   },
 
-  validate: function(username, password) {
+  validate: function(req, res , callback ) {
     // spoofing the DB response for simplicity
     /*var dbUserObj = { // spoofing a userobject from the DB.
       name: 'robekson',
       role: 'admin',
       username: 'robekson@gmail.com'
     };*/
+        var dbUserObj;
+        cloudant.login(req,res, function(data) {
 
-     var dbUserObj;
+         if (data.docs.length!=0 && req.body.username == data.docs[0].nome && req.body.password == data.docs[0].senha ){
+                dbUserObj = { // spoofing a userobject from the DB.
+                      name: data.docs[0].nome,
+                      role: 'admin',
+                      username: data.docs[0].nome
+                 };
+                 callback(dbUserObj);
+           } else {
+                 callback(dbUserObj);
+           }
 
-     if (username == 'robekson@gmail.com' && password == 'pass123' ){
-        dbUserObj = { // spoofing a userobject from the DB.
-              name: 'robekson',
-              role: 'admin',
-              username: 'robekson@gmail.com'
-         };
-     }
+     });
 
-    return dbUserObj;
+
   },
 
   validateUser: function(username) {
@@ -79,7 +81,8 @@ var auth = {
 
 // private method
 function genToken(user) {
-  var expires = expiresIn(7); // 7 days
+  //var expires = expiresIn(7); // 7 days
+  var expires = expiresSeg(60);
   var token = jwt.encode({
     exp: expires
   }, require('../config/secret')());
@@ -95,5 +98,11 @@ function expiresIn(numDays) {
   var dateObj = new Date();
   return dateObj.setDate(dateObj.getDate() + numDays);
 }
+
+function expiresSeg(segundos) {
+  var dateObj = new Date();
+  return dateObj.setSeconds(segundos);
+}
+
 
 module.exports = auth;

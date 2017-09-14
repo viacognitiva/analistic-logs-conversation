@@ -138,7 +138,19 @@
                });
 
 
+         },
+
+         login: function (req, res , callback) {
+             db = cloudantDB.db.use('usuario');
+             var query = { selector: { nome: req.body.username , senha: req.body.password}};
+              db.find(query, function(err, data) {
+                 if (err) {
+                        return console.log('error ao buscar usuario login] ', err.message);
+                  }
+                  callback(data);
+             });
          }
+
     };
 
 module.exports = cloudant;
