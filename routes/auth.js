@@ -6,6 +6,8 @@ var auth = {
 
   login: function(req, res) {
 
+  console.log("SESSAO ="+req.session);
+
     var username = req.body.username || '';
     var password = req.body.password || '';
 
@@ -20,8 +22,6 @@ var auth = {
 
     // Fire a query to your DB and check if the credentials are valid
     auth.validate(req, res , function(dbUserObj) {
-
-      console.log(dbUserObj);
 
         if (!dbUserObj) { // If authentication fails, we send a 401 back
               res.status(401);
@@ -57,6 +57,7 @@ var auth = {
                       role: 'admin',
                       username: data.docs[0].nome
                  };
+                 req.session.usuario = dbUserObj;
                  callback(dbUserObj);
            } else {
                  callback(dbUserObj);

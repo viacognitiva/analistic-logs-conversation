@@ -8,6 +8,7 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
             $scope.searchFish   = '';     // set the default search/filter term
 
 
+
             $scope.buscar = function() {
 
                 $scope.loading = true;
@@ -163,6 +164,15 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                                     backdrop:false,
                                     size: size,
                                 });
+                 };
+
+                 $scope.inicializa = function(){
+                     //$scope.usuariologado = "Rafaeil";
+                     $http.get('/api/getUserAutenticado').then(function(response) {
+                          var data = response.data;
+                          $scope.usuariologado = data.username;
+                     });
+
                  };
 
 

@@ -9,6 +9,9 @@ var express = require('express'),
     fs = require('fs');
 var cfenv = require('cfenv');
 
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+
 var cloudant = require('./config/cloudant.js');
 
 var logconversation = require('./config/logconversation.js');
@@ -44,6 +47,16 @@ if ('development' == app.get('env')) {
     app.use(errorHandler());
 }
 
+
+app.use(cookieParser());
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {}
+}))
+
 app.get('/', routes.login);
 
 app.post('/login', auth.login);
@@ -57,6 +70,15 @@ app.get('/api/cloudant/:id', function (req, res) {
 
 app.get('/api/logconversation', function (req, res) {
     logconversation.get(req, res);
+});
+
+
+app.get('/api/getUserAutenticado', function (req, res) {
+  if (typeof req.session.usuario != 'undefined'){
+      res.status(200).json(req.session.usuario);
+  }else {
+      res.status(200).json({"message":"usuário não encontrado na sessão"});
+  }
 });
 
 app.get('/api/logconversation/entities', function (req, res) {
