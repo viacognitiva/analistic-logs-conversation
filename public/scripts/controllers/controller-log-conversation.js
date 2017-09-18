@@ -1,7 +1,7 @@
 
 var app = angular.module('MinhaApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal', function($scope, $log, $http,$filter,$uibModal) {
+app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal','$window', function($scope, $log, $http,$filter,$uibModal,$window) {
 
             $scope.sortType     = 'name'; // set the default sort type
             $scope.sortReverse  = true;  // set the default sort order
@@ -65,6 +65,11 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                       $scope.loading = false;
 
                  });
+             }
+
+
+             $scope.logout = function() {
+                   $window.location.href='/';
              }
 
              $scope.isNumber = angular.isNumber;

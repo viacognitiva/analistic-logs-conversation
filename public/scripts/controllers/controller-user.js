@@ -1,6 +1,6 @@
 var app = angular.module('MinhaApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('userController', ['$window','$scope', '$log', '$http','$filter','$uibModal', function($window,$scope, $log, $http,$filter,$uibModal) {
+app.controller('userController', ['$window','$scope', '$log', '$http','$filter','$uibModal','$location', function($window,$scope, $log, $http,$filter,$uibModal,$location) {
 
    $scope.logar = function() {
 
