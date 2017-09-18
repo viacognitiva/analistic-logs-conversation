@@ -1,97 +1,76 @@
-  body {
-    background-image: url(../images/FundoChat.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  html, body, #wrapper {
-    margin: 0;
-    padding: 0;
-  }
-  .box-header{
-    background-color:#fff;
-  }
-  .box-header .box-title{
-      color:#3BBAB5;
-  }
-  .box{
-      background-color: rgba(255, 255, 255, 0.22);
-  }
-  .input-group{
-      margin-bottom:15px;
-  }
-  #wrapper {
-    background-color: #ecf0f1;
-  }
-  #chat_box {
-    box-sizing: border-box;
-    height:80%;
-    overflow: auto;
-    padding-bottom: 50px;
-  }
-
-  #footer {
-    box-sizing: border-box;
-    position: fixed;
-    bottom: 0;
-    height: 50px;
-    width: 100%;
-    background-color: #2980b9;
-  }
-
-  #footer .content {
-    padding-top: 4px;
-    position: relative;
-  }
-
-  #user { width: 20%; }
-  #message { //width: 68%; }
-  #send_btn {
-   // width: 10%;
-    //position: absolute;
-    //right: 0;
-    //bottom: 0;
-    //margin: 0;
-  }
-
-  .content {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  #system,
-  .username {
-    color: #aaa;
-    font-style: italic;
-    font-family: monospace;
-    font-size: 16px;
-  }
-  .direct-chat-msg{
-    margin-bottom:0;
-  }
-  @media(max-width: 1000px) {
-    .content { width: 90%; }
-  }
-  @media (min-width: 992px){
-    .col-md-3 {
-      width: 50%;
-      margin: 0 auto;
-      float: none;
-    }
-  }
-  @media(max-width: 780px) {
-    #footer { height: 91px; }
-    #chat_box { padding-bottom: 91px; }
-
-    #user { width: 100%; }
-    #message { width: 80%; }
-  }
-
-  @media(max-width: 400px) {
-    #footer { height: 135px; }
-
-    #message { width: 100%; }
-    #send_btn {
-      position: relative;
-      width: 100%;
-    }
-  }
+body{
+    color: #666;
+}
+a {
+    color: #a81f42;
+}
+a:hover, a:active, a:focus {
+    color: #333333;
+}
+.logoLogin{
+    width:100%;
+    text-align:center;
+    margin-bottom:30px;
+}
+.login-box, .register-box{
+    margin:0 auto;
+}
+.login-page, .register-page {
+    background: #fcf1f0;
+}
+.login-logo a, .register-logo a{
+    color: #a81f42;
+}
+.main-header .navbar{
+    min-height:70px;
+}
+.main-header .logo{
+    height:70px;
+}
+.navbar-nav{
+    margin:10px 0;
+}
+.btn-primary, .btn-primary:focus,.btn-primary:active{
+    color: #fff;
+    background-color: #A81F42;
+    border:none;
+}
+.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover{
+    background-color: #A81F42;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary.hover {
+    background-color: #444;
+}
+.btn-warning{
+    border:none;
+    color: #666;
+    background-color: #f4f4f4;
+}
+.btn-warning:hover,.btn-warning:focus,.btn-warning:active,.btn-warning:active:focus {
+    background-color: #e7e7e7;
+    color: #666;
+}
+.skin-blue .main-header .navbar{
+    background-color: #fcf1f0;
+}
+.skin-blue .main-header .navbar .nav>li>a{
+    color:#000;
+}
+.skin-blue .main-header .navbar .nav>li>a:hover, .skin-blue .main-header .navbar .nav>li>a:active, .skin-blue .main-header .navbar .nav>li>a:focus, .skin-blue .main-header .navbar .nav .open>a, .skin-blue .main-header .navbar .nav .open>a:hover, .skin-blue .main-header .navbar .nav .open>a:focus, .skin-blue .main-header .navbar .nav>.active>a{
+    background: none;
+    color: #C71A41;
+}
+.skin-blue .main-header .logo,.skin-blue .main-header .logo:hover {
+    background-color: transparent;
+    width:120px;
+}
+.box.box-primary {
+    border-top-color: #fcf1f0;
+}
+.content-header>h1{
+    color: #a81f42;
+    font-weight:bold;
+}
+.skin-blue .main-header li.user-header{
+    background-color: #a81f42;
+}
