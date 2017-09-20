@@ -20,6 +20,8 @@ var auth = require('./routes/auth.js');
 
 var validateRequest = require('./config/validateRequest.js');
 
+var schedule = require('node-schedule');
+
 
 var app = express();
 
@@ -128,6 +130,12 @@ app.get('/api/logconversation/workspace', function (req, res) {
 app.get('/api/logconversation/workspace/selecionado', function (req, res) {
     cloudant.getWorkspaceSelecionada(req, res);
 });
+
+var job = schedule.scheduleJob('*/1 * * * *', function(){
+  console.log('Rodando Job Carga Log Treinamento..');
+  cloudant.insertLogTreinamento();
+});
+
 
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
     console.log('Express server listening on port ' + app.get('port'));

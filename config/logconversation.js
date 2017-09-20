@@ -11,8 +11,11 @@ var apiHostname = 'gateway.watsonplatform.net';
 
 function mymodule_init(callback){
 
-     // console.log("http://localhost:"+app.get('port')+"/api/logconversation/workspace/selecionado");
-       request.get("http://localhost:"+app.get('port')+"/api/logconversation/workspace/selecionado",function(err,resp,body){
+
+      var fullUrl = "http" + "://localhost:"+app.get('port')+"/api/logconversation/workspace/selecionado";
+        console.log("fullUrl "+fullUrl);
+        console.log("ambiente "+process.env.NODE_ENV );
+       request.get(fullUrl,function(err,resp,body){
         //   console.log("inicializando .."+body);
 
            if (typeof body != 'undefined') {
