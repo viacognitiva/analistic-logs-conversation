@@ -7,12 +7,12 @@ var workspacesId =  '257e3228-66e9-439a-84dd-f295fb4fd403';
 var username = 'd1df6c26-bedc-4965-9a79-e1339c0cff80';
 var password = '3lUqPxo4kNm2';
 var apiHostname = 'gateway.watsonplatform.net';
-
+var protocol = process.env.NODE_ENV == 'production' ? "https" : "http"
 
 function mymodule_init(callback){
 
 
-      var fullUrl = "http" + "://localhost:"+app.get('port')+"/api/logconversation/workspace/selecionado";
+      var fullUrl = protocol + "://localhost:"+app.get('port')+"/api/logconversation/workspace/selecionado";
         console.log("fullUrl "+fullUrl);
         console.log("ambiente "+process.env.NODE_ENV );
        request.get(fullUrl,function(err,resp,body){
