@@ -149,6 +149,14 @@
                   }
                   callback(data);
              });
+         },
+
+         insertLogTreinamento : function () {
+             db = cloudantDB.db.use('log-treinamento-abrale');
+
+             console.log("insertLogTreinamento");
+            // callback(null)
+
          }
 
     };
