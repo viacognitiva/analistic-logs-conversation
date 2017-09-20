@@ -67,10 +67,6 @@ a:hover, a:active, a:focus {
 .box.box-primary {
     border-top-color: #fcf1f0;
 }
-.box_limiteAltura{
-    max-height:330px;
-    overflow:auto;
-}
 .content-header>h1{
     color: #7c903d;
     font-weight:bold;
@@ -78,4 +74,37 @@ a:hover, a:active, a:focus {
 }
 .skin-blue .main-header li.user-header{
     background-color: #a81f42;
+}
+.table{
+  margin-bottom:0;
+}
+.tabela {
+  position: relative;
+  border: 1px solid #f4f4f4;
+  padding-top: 37px;
+  background: #fff;
+}
+.box_limiteAltura{
+    max-height:290px;
+    overflow:auto;
+}
+th {
+  height: 0!important;
+  line-height: 0!important;
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+  color: transparent;
+  border: none!important;
+  white-space: nowrap;
+  background:#f9f9f9;
+}
+th div{
+  position: absolute;
+  background: transparent;
+  color: #fff;
+  padding: 9px 10px;
+  top: 0;
+  margin-left: -9px;
+  line-height: normal;
+  border-left: 1px solid #f4f4f4;
 }
