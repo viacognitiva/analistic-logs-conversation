@@ -67,9 +67,14 @@ a:hover, a:active, a:focus {
 .box.box-primary {
     border-top-color: #fcf1f0;
 }
+.box_limiteAltura{
+    max-height:330px;
+    overflow:auto;
+}
 .content-header>h1{
-    color: #a81f42;
+    color: #7c903d;
     font-weight:bold;
+    font-size:30px
 }
 .skin-blue .main-header li.user-header{
     background-color: #a81f42;

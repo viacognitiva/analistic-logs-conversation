@@ -150,7 +150,8 @@
                 </div>
             </form>
             <div class="box-body">
-                <table class="table table-bordered table-striped">
+                <div class="box_limiteAltura">
+                    <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <td><a href="#" > </a>
@@ -208,21 +209,22 @@
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="item in (filteredItems = (items | orderBy:sortType:sortReverse | filter:searchFish ))"  >
-                        <td>
-                            <input type="checkbox" name="selectedItem[]"  value="{{item.id}}" ng-checked="selection.indexOf(item.id) > -1" ng-click="toggleSelection(item.id)">
-                        </td>
-                        <td>{{item.conversation_id}}</td>
-                        <td>{{item.msgUser}}</td>
-                        <td >{{item.confidenceIntencao}} <span ng-show="isNumber(item.confidenceIntencao)">%</span></td>
-                        <td>{{item.intencao}}</td>
-                        <td >{{item.confidenceEntidade}} <span ng-show="isNumber(item.confidenceEntidade)">%</span></td>
-                        <td>{{item.entidade}}</td>
-                        <td>{{item.data}}</td>
-                        <!--<td>{{item.id}}</td>-->
-                    </tr>
+                        <tr ng-repeat="item in (filteredItems = (items | orderBy:sortType:sortReverse | filter:searchFish ))"  >
+                            <td>
+                                <input type="checkbox" name="selectedItem[]"  value="{{item.id}}" ng-checked="selection.indexOf(item.id) > -1" ng-click="toggleSelection(item.id)">
+                            </td>
+                            <td>{{item.conversation_id}}</td>
+                            <td>{{item.msgUser}}</td>
+                            <td >{{item.confidenceIntencao}} <span ng-show="isNumber(item.confidenceIntencao)">%</span></td>
+                            <td>{{item.intencao}}</td>
+                            <td >{{item.confidenceEntidade}} <span ng-show="isNumber(item.confidenceEntidade)">%</span></td>
+                            <td>{{item.entidade}}</td>
+                            <td>{{item.data}}</td>
+                            <!--<td>{{item.id}}</td>-->
+                        </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
         <!-- /.box-body -->
