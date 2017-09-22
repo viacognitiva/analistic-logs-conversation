@@ -389,6 +389,13 @@
               $( "<style>.custom-dialog .modal-dialog { width :20%; min-width: 600px;}</style>" ).appendTo( "head" );
             }
         });
+
+        $(function(){
+          $('.box_limiteAltura') .css({'height': (($(window).height()) - 380)+'px'});
+          $(window).bind('resize', function(){
+            $('.box_limiteAltura') .css({'height': (($(window).height()) - 380)+'px'});
+          });
+        });
    </script>
 <!-- FastClick -->
 
