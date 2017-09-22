@@ -85,7 +85,6 @@ a:hover, a:active, a:focus {
   background: #fff;
 }
 .box_limiteAltura{
-    max-height:290px;
     overflow:auto;
 }
 th {
