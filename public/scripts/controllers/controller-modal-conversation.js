@@ -68,7 +68,8 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
                                            var data = {
                                                          entidade: $scope.selectedEntidade ,
                                                          valor: $ctrl.selectedEntidadeValue,
-                                                         sinonimo: item.msgUser };
+                                                         sinonimo: item.msgUser,
+                                                         id:sel };
 
                                               $http.post('/api/logconversation/entidade/synonyms', JSON.stringify(data) , config)
                                                 .then(
@@ -94,7 +95,8 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
 
                                              var data = {
                                                   entidade: $scope.selectedEntidade ,
-                                                  valor: item.msgUser  };
+                                                  valor: item.msgUser,
+                                                  id:sel  };
 
                                              $http.post('/api/logconversation/entidade', JSON.stringify(data) , config)
                                                  .then(

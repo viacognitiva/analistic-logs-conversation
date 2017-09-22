@@ -99,6 +99,8 @@ mymodule_init(function(){});
           const fullUrl = `https://${username}:${password}@${apiHostname}${baseQuery}?${version}`;
           console.log(fullUrl);
 
+          console.log("id do treina intencao "+req.body.id);
+
           request.post({
               headers: { "Content-Type": "application/json"},
               url:     fullUrl,
@@ -120,6 +122,8 @@ mymodule_init(function(){});
 
           const fullUrl = `https://${username}:${password}@${apiHostname}${baseQuery}?${version}`;
           console.log(fullUrl);
+
+          console.log("id do treina entidade "+req.body.id);
 
           request.post({
               headers: { "Content-Type": "application/json"},

@@ -12,14 +12,14 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
             $scope.buscar = function() {
 
                 $scope.loading = true;
-                $http.get('/api/logconversation').then(function(response) {
+                $http.get('/api/logconversation/treinamento').then(function(response) {
                    var retorno = [];
 
                    var data = response.data;
                    console.log('data '+data);
                     var pos = 0;
 
-                    angular.forEach(data.logs, function(item){
+                    angular.forEach(data.docs, function(item){
                          var jsonParam = {};
                           angular.forEach(item.response.entities, function(ent){
                                jsonParam.entidade = ent.entity;
@@ -40,6 +40,7 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                             jsonParam.conversation_id = item.response.context.conversation_id;
                             jsonParam.data = $filter('date')(item.response_timestamp, "dd-MM-yyyy HH:mm:ss");
                             jsonParam.id=item.log_id;
+                            jsonParam.treinado=item.treinado;
                           }
 
                          if(!angular.equals(jsonParam, {})){

@@ -59,9 +59,9 @@ app.use(session({
   cookie: {}
 }))
 
-var job = schedule.scheduleJob('*/1 * * * *', function(){
+var job = schedule.scheduleJob('0 10 16 ? * *', function(){
   console.log('Rodando Job Carga Log Treinamento..');
- // cloudant.insertLogTreinamento(function() {});
+  cloudant.insertLogTreinamento(function() {});
 });
 
 app.get('/', routes.login);
@@ -77,6 +77,11 @@ app.get('/api/cloudant/:id', function (req, res) {
 
 app.get('/api/logconversation', function (req, res) {
     logconversation.get(req, res);
+});
+
+app.get('/api/logconversation/treinamento', function (req, res) {
+    console.log('Buscando ->  treinamento');
+    cloudant.getLogTreinamento(req, res);
 });
 
 

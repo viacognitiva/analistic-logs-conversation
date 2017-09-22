@@ -207,6 +207,8 @@
                                 <span ng-show="showUp('data')" class="fa fa-caret-up"></span>
                             </a></div>
                         </th>
+                        <th>Status<div><a href="#">
+                            Status</a></div></th>
                     </tr>
                     </thead>
 
@@ -222,6 +224,7 @@
                             <td >{{item.confidenceEntidade}} <span ng-show="isNumber(item.confidenceEntidade)">%</span></td>
                             <td>{{item.entidade}}</td>
                             <td>{{item.data}}</td>
+                            <td><span ng-show="{{item.treinado}}" class="fa fa-check" aria-hidden="true"> </span></td>
                             <!--<td>{{item.id}}</td>-->
                         </tr>
                     </tbody>
