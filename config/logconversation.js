@@ -7,11 +7,9 @@ var workspacesId =  '257e3228-66e9-439a-84dd-f295fb4fd403';
 var username = 'd1df6c26-bedc-4965-9a79-e1339c0cff80';
 var password = '3lUqPxo4kNm2';
 var apiHostname = 'gateway.watsonplatform.net';
-var protocol = process.env.NODE_ENV == 'production' ? "https" : "http"
+var protocol = process.env.NODE_ENV == 'production' ? "https" : "http" ;
 
 function mymodule_init(callback){
-
-
       var fullUrl = protocol + "://localhost:"+app.get('port')+"/api/logconversation/workspace/selecionado";
         console.log("fullUrl "+fullUrl);
         console.log("ambiente "+process.env.NODE_ENV );
@@ -37,9 +35,7 @@ mymodule_init(function(){});
  var logConversation = {
      get : function(req, res) {
 
-       mymodule_init(function(){
-
-
+      // mymodule_init(function(){
 
         console.log("Buscando log");
        // const workspacesId =  '7f576bfc-2d11-4de2-b985-98e8185e5664';
@@ -58,7 +54,7 @@ mymodule_init(function(){});
 
         });
 
-        });
+       // });
 
   },
   getEntidades : function(req, res) {

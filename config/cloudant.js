@@ -1,6 +1,14 @@
 
   var Cloudant = require('cloudant');
+  var express = require('express');
   var fs = require('fs');
+  var request=require('request');
+  var http = require("http");
+  var app = express();
+  app.set('port', process.env.PORT || 2000);
+  var protocol = process.env.NODE_ENV == 'production' ? "https" : "http" ;
+
+  var sleep = require('sleep');
 
     var cloudant_url="https://b6a29beb-91ed-4256-81c4-458e3ff55a71-bluemix:2cd1080e5c8ac457d9cbc3105aabfa7f28abfe45e03cae99eaa5910dbc84ab6a@b6a29beb-91ed-4256-81c4-458e3ff55a71-bluemix.cloudant.com";
     var services = JSON.parse(process.env.VCAP_SERVICES || "{}");
@@ -151,15 +159,90 @@
              });
          },
 
-         insertLogTreinamento : function () {
+         insertLogTreinamento : function (callback) {
              db = cloudantDB.db.use('log-treinamento-abrale');
+             db.index( {name:'_id', type:'json', index:{fields:['request_timestamp']}});
 
              console.log("insertLogTreinamento");
             // callback(null)
 
+            var fullUrl = protocol + "://localhost:"+app.get('port')+"/api/logconversation/";
+
+            console.log(fullUrl);
+
+           request.get(fullUrl,function(err,resp,body){
+
+              if(err){
+                 console.log(" insertLogTreinamento : "+JSON.parse(body));
+              }
+
+              var dataLog = JSON.parse(body);
+
+              console.log(dataLog.logs.length);
+
+              for(var i = 0; i < dataLog.logs.length;i++){
+
+                if(dataLog.logs[i].request.input.text.length !=0){
+                      teste(dataLog.logs[i],function(data) {
+
+                        /*console.log(" "+data);
+                        console.log(" "+data != 'undefined');
+
+                         */
+                         if (data != 'undefined' && data.request.input.text.length !=0){
+                                db.insert(data, function(err, resp) {
+                                   if (err) return console.log(err.message);
+                                   console.log('update completed: ' + JSON.stringify(resp));
+                                   callback(data);
+                                });
+                            }
+
+
+                      });
+
+                  }
+
+                }
+
+
+            });
+
+
          }
 
     };
+
+ function teste(dataLogs,callback){
+    //console.log(dataLogs.log_id);
+    var query = { selector: { request_timestamp: dataLogs.request_timestamp , request: {input: {text: dataLogs.request.input.text}} }};
+
+   // var query = { selector: { log_id: dataLogs.log_id }};
+    //console.log(query);
+    db.find(query, function(err, data) {
+       console.log(data);
+
+       if(typeof data === 'undefined' ){
+           console.log("Inserindo novo");
+           callback(dataLogs);
+       }
+       else if ( typeof data.docs[0] === 'undefined' ) {
+           console.log("Inserindo novo");
+          callback(dataLogs);
+        }else{
+          console.log("Não inserir");
+          callback('undefined');
+        }
+    });
+
+   /*
+    db.find(query, function(err, data) {
+             if (typeof data == 'undefined') {
+                console.log(dataLog.log_id);
+             }
+              callback(dataLog.log_id);
+
+      });*/
+ }
 
 module.exports = cloudant;
 
