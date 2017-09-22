@@ -214,21 +214,24 @@
 
  function teste(dataLogs,callback){
     //console.log(dataLogs.log_id);
-    var query = { selector: { request_timestamp: dataLogs.request_timestamp , request: {input: {text: dataLogs.request.input.text}} }};
+    var query = { selector: { request_timestamp: dataLogs.request_timestamp , request: {input: {text: dataLogs.request.input.text}},_rev:dataLogs._rev }};
 
    // var query = { selector: { log_id: dataLogs.log_id }};
     //console.log(query);
     db.find(query, function(err, data) {
-       console.log(data);
 
-       if(typeof data === 'undefined' ){
+
+       if(typeof data == 'undefined' ){
            console.log("Inserindo novo");
+           console.log(data);
            callback(dataLogs);
        }
-       else if ( typeof data.docs[0] === 'undefined' ) {
+       else if ( typeof data.docs[0] == 'undefined' ) {
+           console.log(data);
            console.log("Inserindo novo");
           callback(dataLogs);
         }else{
+          console.log(data);
           console.log("Não inserir");
           callback('undefined');
         }
