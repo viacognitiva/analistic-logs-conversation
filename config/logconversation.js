@@ -152,7 +152,8 @@ mymodule_init(function(){});
                   if(err){
                      console.log(" logConversation.getEntidadeValue Error: "+JSON.parse(body));
                   }
-                  res.status(200).json(JSON.parse(body));
+                //  res.status(200).json(body);
+                   res.status(200).json(JSON.parse(body));
 
           });
 

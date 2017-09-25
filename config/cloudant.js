@@ -209,8 +209,27 @@
 
 
               });
-         }
+         },
+         atualizaStatusTreinamento: function (req, res){
+                db = cloudantDB.db.use('log-treinamento-abrale');
+                const id =  req.body.idLog;
+                db.index( {log_id: 'log_id', type:'json', index:{fields:['log_id']}});
+                var query = { selector: { log_id: id }};
+                db.find(query, function(err, data) {
+                     if (err) {
+                           return console.log('[db.atualizaStatusTreinamento] ', err.message);
+                       }
 
+                     data.docs[0].treinado=true;
+                     db.insert(data.docs[0], function(err, data) {
+                          if (err) return console.log(err.message);
+                           console.log('update completed: ' + data);
+                           res.status(201).json(data);
+                      });
+
+               });
+
+         }
     };
 
 

@@ -39,6 +39,18 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
                                                 $ctrl.errorMessage=""+response.data.error;
                                             }else {
                                                 $ctrl.sucessoMessage="Intenção associada com sucesso.";
+                                                var data1 = { idLog:sel };
+                                                $http.post('/api/logconversation/treinamento/status', JSON.stringify(data1) , config)
+                                                .then(function(response){
+                                                        console.log('Sucesso '+response);
+                                                        if(response.status==201){
+                                                          $scope.buscar();
+                                                        }
+
+                                                 },
+                                                   function(response){
+                                                      console.log('Erro '+response);
+                                                 });
                                             }
                                          }
                                        },
@@ -69,7 +81,7 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
                                                          entidade: $scope.selectedEntidade ,
                                                          valor: $ctrl.selectedEntidadeValue,
                                                          sinonimo: item.msgUser,
-                                                         id:sel };
+                                                         idLog:sel };
 
                                               $http.post('/api/logconversation/entidade/synonyms', JSON.stringify(data) , config)
                                                 .then(
@@ -81,6 +93,19 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
                                                              $ctrl.errorMessage=""+response.data.error;
                                                          }else {
                                                              $ctrl.sucessoMessage="Sinonimo criado com sucesso.";
+                                                              var data1 = { idLog:sel };
+                                                              $http.post('/api/logconversation/treinamento/status', JSON.stringify(data1) , config)
+                                                              .then(function(response){
+                                                                      console.log('Sucesso '+response);
+                                                                      if(response.status==201){
+                                                                        $scope.buscar();
+                                                                      }
+
+                                                                },
+                                                                 function(response){
+                                                                    console.log('Erro '+response);
+                                                                });
+
                                                          }
                                                       }
                                                     },
@@ -108,6 +133,18 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
                                                               $ctrl.errorMessage=""+response.data.error;
                                                           }else {
                                                               $ctrl.sucessoMessage="Valor da Entidade criado com sucesso.";
+                                                               var data1 = { idLog:sel };
+                                                                $http.post('/api/logconversation/treinamento/status', JSON.stringify(data1) , config)
+                                                                .then(function(response){
+                                                                        console.log('Sucesso '+response);
+                                                                         if(response.status==201){
+                                                                            $scope.buscar();
+                                                                          }
+
+                                                                 },
+                                                                   function(response){
+                                                                      console.log('Erro '+response);
+                                                                 });
                                                           }
                                                        }
                                                      },
@@ -185,6 +222,7 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
        //funcão quando modificado o select da entidade
        $ctrl.onchangeEntidade= function() {
              limpar();
+             console.log("change entidade");
               var entidade= $scope.selectedEntidade;
              if($ctrl.defineVlrSin=='Sinonimo'){
                  $http.get('/api/logconversation/entidade/value/'+entidade).then(function(response) {
