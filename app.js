@@ -59,7 +59,7 @@ app.use(session({
   cookie: {}
 }))
 
-var job = schedule.scheduleJob('00 14 * * *', function(){
+var job = schedule.scheduleJob('00 23 * * *', function(){
   console.log('Rodando Job Carga Log Treinamento..');
   cloudant.insertLogTreinamento(function() {});
 });
