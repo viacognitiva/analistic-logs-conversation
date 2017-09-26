@@ -192,7 +192,7 @@ app.filter('filterTreinamento', function() {
       var filtered = [];
       var condicao =  treinado == 'Sim' ? true  : false;
 
-      if(!treinado){
+      if(!treinado){//se treinado is undifenid
          angular.forEach(items, function(item) {
                    filtered.push(item);
           });
@@ -204,6 +204,68 @@ app.filter('filterTreinamento', function() {
         }
       });
       return filtered;
+    };
+});
+
+
+app.filter('filterConfianca', function() {
+    return function( items, sinal , porcentagem , tpTreinamento ) {
+      var filtered = [];
+
+      console.log(porcentagem  );
+      console.log(tpTreinamento);
+
+      if(!sinal || !porcentagem || !tpTreinamento ){
+
+        console.log("todos undefinidos");
+           angular.forEach(items, function(item) {
+
+                      filtered.push(item);
+           });
+           return filtered;
+
+      }
+
+     // item.confidenceIntencao
+     //item.confidenceEntidade
+      if(tpTreinamento=='Entidade'){
+         if(sinal=='<'){
+            angular.forEach(items, function(item) {
+                 console.log(item.confidenceEntidade);
+                if( item.confidenceEntidade <= porcentagem  ) {
+                  filtered.push(item);
+                }
+             });
+            return filtered;
+         }
+         else if (sinal=='>'){
+            angular.forEach(items, function(item) {
+                if(item.confidenceEntidade >= porcentagem ) {
+                  filtered.push(item);
+                }
+             });
+            return filtered;
+         }
+
+       } else if(tpTreinamento =='Intenção'){
+              if(sinal=='<'){
+                 angular.forEach(items, function(item) {
+                     if( item.confidenceIntencao < porcentagem  ) {
+                       filtered.push(item);
+                     }
+                  });
+                 return filtered;
+              }
+              else if (sinal=='>'){
+                 angular.forEach(items, function(item) {
+                     if(item.confidenceIntencao > porcentagem ) {
+                       filtered.push(item);
+                     }
+                  });
+                 return filtered;
+              }
+       }
+
     };
 });
 

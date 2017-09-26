@@ -152,7 +152,7 @@
                           <span class="input-group-addon">
                             <label>Confianca</label>
                           </span>
-                            <select ng-model="selectedSinalMaiorMeno" class="form-control" ng-options="x for x in sinalMaiorMenor">
+                            <select ng-model="selectedSinalMaiorMenor" class="form-control" ng-options="x for x in sinalMaiorMenor">
                                 <option value="">selecione</option></select>
                         </div>
                         <!-- /input-group -->
@@ -246,7 +246,7 @@
                     </thead>
 
                     <tbody>
-                        <tr ng-repeat="item in (filteredItems = (items | orderBy:sortType:sortReverse | filter:searchFish | filterTreinamento:selectedOpcaoTreinamento ))"  >
+                        <tr ng-repeat="item in (filteredItems = (items | orderBy:sortType:sortReverse | filter:searchFish | filterTreinamento:selectedOpcaoTreinamento | filterConfianca:selectedSinalMaiorMenor:selectedPrcConfianca:selectedTpTreinamento  ))"  >
                             <td>
                                 <input type="checkbox" name="selectedItem[]"  value="{{item.id}}" ng-checked="selection.indexOf(item.id) > -1" ng-click="toggleSelection(item.id)">
                             </td>
