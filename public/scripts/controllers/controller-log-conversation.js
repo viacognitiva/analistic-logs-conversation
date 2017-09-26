@@ -7,14 +7,16 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
             $scope.sortReverse  = true;  // set the default sort order
             $scope.searchFish   = '';     // set the default search/filter term
 
-
+            $scope.opcaoTreinamento = ["Sim", "Não"];
+            $scope.tpTreinamento = ["Intenção", "Entidade"];
+            $scope.prcConfianca = ["10", "20","30","40","50","60","70","80","90","100"];
+            $scope.sinalMaiorMenor = ["<", ">"];
 
             $scope.buscar = function() {
 
                 $scope.loading = true;
                 $http.get('/api/logconversation/treinamento').then(function(response) {
                    var retorno = [];
-
                    var data = response.data;
                    console.log('data '+data);
                     var pos = 0;
@@ -183,5 +185,26 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
 
 
 }]);
+
+
+app.filter('filterTreinamento', function() {
+    return function( items, treinado ) {
+      var filtered = [];
+      var condicao =  treinado == 'Sim' ? true  : false;
+
+      if(!treinado){
+         angular.forEach(items, function(item) {
+                   filtered.push(item);
+          });
+         return filtered;
+      }
+      angular.forEach(items, function(item) {
+        if( condicao == item.treinado ) {
+          filtered.push(item);
+        }
+      });
+      return filtered;
+    };
+});
 
 
