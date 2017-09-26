@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 app.set('port', process.env.PORT || 2000);
 
-var workspacesId =  '257e3228-66e9-439a-84dd-f295fb4fd403';
+var workspacesId =  '7f576bfc-2d11-4de2-b985-98e8185e5664';
 var username = 'd1df6c26-bedc-4965-9a79-e1339c0cff80';
 var password = '3lUqPxo4kNm2';
 var apiHostname = 'gateway.watsonplatform.net';
