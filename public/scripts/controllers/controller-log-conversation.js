@@ -10,7 +10,7 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
             $scope.opcaoTreinamento = ["Sim", "Não"];
             $scope.tpTreinamento = ["Intenção", "Entidade"];
             $scope.prcConfianca = ["10", "20","30","40","50","60","70","80","90","100"];
-            $scope.sinalMaiorMenor = ["<", ">"];
+            $scope.sinalMaiorMenor = ["<=", ">="];
 
             $scope.buscar = function() {
 
@@ -222,7 +222,7 @@ app.filter('filterConfianca', function() {
       }
 
       if(tpTreinamento=='Entidade'){
-         if(sinal=='<'){
+         if(sinal=='<='){
             angular.forEach(items, function(item) {
                 if( item.confidenceEntidade <= porcentagem  ) {
                   filtered.push(item);
@@ -230,7 +230,7 @@ app.filter('filterConfianca', function() {
              });
             return filtered;
          }
-         else if (sinal=='>'){
+         else if (sinal=='>='){
             angular.forEach(items, function(item) {
                 if(item.confidenceEntidade >= porcentagem ) {
                   filtered.push(item);
@@ -240,17 +240,17 @@ app.filter('filterConfianca', function() {
          }
 
        } else if(tpTreinamento =='Intenção'){
-              if(sinal=='<'){
+              if(sinal=='<='){
                  angular.forEach(items, function(item) {
-                     if( item.confidenceIntencao < porcentagem  ) {
+                     if( item.confidenceIntencao <= porcentagem  ) {
                        filtered.push(item);
                      }
                   });
                  return filtered;
               }
-              else if (sinal=='>'){
+              else if (sinal=='>='){
                  angular.forEach(items, function(item) {
-                     if(item.confidenceIntencao > porcentagem ) {
+                     if(item.confidenceIntencao >= porcentagem ) {
                        filtered.push(item);
                      }
                   });
