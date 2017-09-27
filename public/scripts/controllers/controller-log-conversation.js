@@ -212,12 +212,7 @@ app.filter('filterConfianca', function() {
     return function( items, sinal , porcentagem , tpTreinamento ) {
       var filtered = [];
 
-      console.log(porcentagem  );
-      console.log(tpTreinamento);
-
       if(!sinal || !porcentagem || !tpTreinamento ){
-
-        console.log("todos undefinidos");
            angular.forEach(items, function(item) {
 
                       filtered.push(item);
@@ -226,12 +221,9 @@ app.filter('filterConfianca', function() {
 
       }
 
-     // item.confidenceIntencao
-     //item.confidenceEntidade
       if(tpTreinamento=='Entidade'){
          if(sinal=='<'){
             angular.forEach(items, function(item) {
-                 console.log(item.confidenceEntidade);
                 if( item.confidenceEntidade <= porcentagem  ) {
                   filtered.push(item);
                 }
