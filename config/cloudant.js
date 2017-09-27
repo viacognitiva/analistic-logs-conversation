@@ -8,8 +8,6 @@
   app.set('port', process.env.PORT || 2000);
   var protocol = process.env.NODE_ENV == 'production' ? "https" : "http" ;
 
-  var sleep = require('sleep');
-
     var cloudant_url="https://b6a29beb-91ed-4256-81c4-458e3ff55a71-bluemix:2cd1080e5c8ac457d9cbc3105aabfa7f28abfe45e03cae99eaa5910dbc84ab6a@b6a29beb-91ed-4256-81c4-458e3ff55a71-bluemix.cloudant.com";
     var services = JSON.parse(process.env.VCAP_SERVICES || "{}");
     var user = 'b6a29beb-91ed-4256-81c4-458e3ff55a71-bluemix'; // Set this to your own account

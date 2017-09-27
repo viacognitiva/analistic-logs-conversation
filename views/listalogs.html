@@ -32,16 +32,13 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <!-- Messages: style can be found in dropdown.less-->
 
-                <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu">
+               <!-- <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="https://adminlte.io/themes/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                         <span class="hidden-xs"> {{usuariologado}}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- User image -->
                         <li class="user-header">
                             <img src="https://adminlte.io/themes/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
@@ -50,7 +47,6 @@
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>
-                        <!-- Menu Body -->
                         <li class="user-body">
                             <div class="row">
                                 <div class="col-xs-4 text-center">
@@ -63,9 +59,7 @@
                                     <a href="#">Friends</a>
                                 </div>
                             </div>
-                            <!-- /.row -->
                         </li>
-                        <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
@@ -76,14 +70,12 @@
                         </li>
                     </ul>
                 </li>
-                <!-- Control Sidebar Toggle Button -->
                 <li class="dropdown tasks-menu">
                     <a href="#" data-toggle="dropdown"><i class="fa fa-gears"></i></a>
 
                     <ul class="dropdown-menu">
                         <li class="header">Menu</li>
                         <li>
-                            <!-- inner menu: contains the actual data -->
                             <ul class="menu">
                                 <li>
                                     <a id="link-1" href  ng-click="modalConfigWorkspace('lg','entidade')" >
@@ -103,7 +95,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li>-->
                 <li class="dropdown tasks-menu" >
                     <a href="#" data-toggle="dropdown" ng-click="logout()"><i class="fa fa-sign-out "></i></a>
                 </li>
@@ -142,7 +134,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-search"></i>
                         </span>
-                            <input type="text" class="form-control" placeholder="digite a busca desejada..." ng-model="searchFish">
+                            <input type="text" class="form-control" placeholder="Digite a busca desejada..." ng-model="searchFish">
                         </div>
                         <!-- /input-group -->
                     </div>
@@ -150,22 +142,22 @@
                     <div class="col-lg-2">
                         <div class="input-group">
                           <span class="input-group-addon">
-                            <label>Confianca</label>
+                            <label>Confiança</label>
                           </span>
                             <select ng-model="selectedSinalMaiorMenor" class="form-control" ng-options="x for x in sinalMaiorMenor">
-                                <option value="">selecione</option></select>
+                                <option value="">-</option></select>
                         </div>
                         <!-- /input-group -->
                     </div>
                     <div class="col-lg-1">
                         <div class="input-group">
-                            <select ng-model="selectedPrcConfianca" class="form-control" ng-options="x for x in prcConfianca"><option value="">selecione</option> </select>
+                            <select ng-model="selectedPrcConfianca" class="form-control" ng-options="x for x in prcConfianca"><option value="">-</option> </select>
                         </div>
                         <!-- /input-group -->
                     </div>
                     <div class="col-lg-2">
                         <div class="input-group">
-                            <select ng-model="selectedTpTreinamento" class="form-control" ng-options="x for x in tpTreinamento"><option value="">selecione</option> </select>
+                            <select ng-model="selectedTpTreinamento" class="form-control" ng-options="x for x in tpTreinamento"><option value="">-</option> </select>
                         </div>
                         <!-- /input-group -->
                     </div>
@@ -175,7 +167,7 @@
                           <span class="input-group-addon">
                             <label>Treinamento</label>
                           </span>
-                            <select ng-model="selectedOpcaoTreinamento"  class="form-control" ng-options="x for x in opcaoTreinamento"><option value="">selecione</option> </select>
+                            <select ng-model="selectedOpcaoTreinamento"  class="form-control" ng-options="x for x in opcaoTreinamento"><option value="">-</option> </select>
                         </div>
                         <!-- /input-group -->
                     </div>
@@ -205,7 +197,7 @@
                                 <span ng-show="showUp('msgUser')" class="fa fa-caret-up"></span>
                             </a></div>
                         </th>
-                        <th>% Confiança da Intenção
+                        <th>% Confiança Intenção
                             <div><a href="#" ng-click="sort_by('confidenceIntencao')">
                                 % Confiança da Intenção
                                 <span ng-show="showDown('confidenceIntencao')" class="fa fa-caret-down"></span>
@@ -219,7 +211,7 @@
                                 <span ng-show="showUp('intencao')" class="fa fa-caret-up"></span>
                             </a></div>
                         </th>
-                        <th>% Confiança da Entidade
+                        <th>% Confiança Entidade
                             <div><a href="#" ng-click="sort_by('confidenceEntidade')">
                                 % Confiança da Entidade
                                 <span ng-show="showDown('confidenceEntidade')" class="fa fa-caret-down"></span>
@@ -272,7 +264,7 @@
 <div ng-controller="ModalInstanceCtrl">
     <script type="text/ng-template" id="myModalEntidade.html">
         <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">Selecione a entidade</h3>
+            <h3 class="modal-title" id="modal-title">Definir Entidade:</h3>
         </div>
         <div class="modal-body" id="modal-body">
             <div class="form-group">
@@ -317,7 +309,7 @@
     </script>
     <script type="text/ng-template" id="myModalIntencao.html">
         <div class="modal-header">
-            <h3 class="modal-title" id="modal-title1">Selecione a intenção</h3>
+            <h3 class="modal-title" id="modal-title1">Definir Intenção:</h3>
         </div>
         <div class="modal-body" id="modal-body1">
             <div class="form-group">
