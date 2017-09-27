@@ -29,6 +29,7 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" style="margin-left: 0px;">
         <div class="logo"><img alt="" class="image-logo" src="/images/logo_home.png" width="95"></div>
+        <div class="titulo">Monitoramento / Treinamento</div>
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -97,7 +98,7 @@
                     </ul>
                 </li>-->
                 <li class="dropdown tasks-menu" >
-                    <a href="#" data-toggle="dropdown" ng-click="logout()"><i class="fa fa-sign-out "></i></a>
+                    <a href="#" data-toggle="dropdown" ng-click="logout()">Logout</a>
                 </li>
             </ul>
         </div>
@@ -109,19 +110,14 @@
     <loading></loading>
     <div class="box box-primary">
         <br/>
-        <section class="content-header" style="text-align: center;">
-            <h1>
-                Monitoramento / Treinamento
-            </h1>
-        </section>
         <!-- /.box-header -->
         <div class="box-body">
             <div class="box-body">
                 <div >
                     <button ng-click="buscar()" class="btn btn-primary">  <i class="fa fa-search"></i>  Buscar</button>
                     <!--<button ng-click="aplicar()" class="btn btn-info pull-right">Aplicar</button>-->
-                    <button ng-click="modalEntidade('lg','entidade')" class="btn btn-primary" ng-disabled="disableBtnTreinarEntidade">Treinar Entidade</button>
-                    <button ng-click="modalIntencao('lg','intencao')" class="btn btn-primary" ng-disabled="disableBtnTreinarIntencao">Treinar Intenção</button>
+                    <button ng-click="modalEntidade('lg','entidade')" class="btn btn-primary direita" ng-disabled="disableBtnTreinarEntidade">Treinar Entidade</button>
+                    <button ng-click="modalIntencao('lg','intencao')" class="btn btn-primary direita" ng-disabled="disableBtnTreinarIntencao">Treinar Intenção</button>
                 </div>
                 <br/>
             </div>
@@ -139,35 +135,25 @@
                         <!-- /input-group -->
                     </div>
                     <!-- /.col-lg-6 -->
-                    <div class="col-lg-2">
+                    <div class="col-lg-4">
                         <div class="input-group">
                           <span class="input-group-addon">
                             <label>Confiança</label>
                           </span>
-                            <select ng-model="selectedSinalMaiorMenor" class="form-control" ng-options="x for x in sinalMaiorMenor">
+                            <select ng-model="selectedSinalMaiorMenor" style="width: 100px;" class="form-control" ng-options="x for x in sinalMaiorMenor">
                                 <option value="">-</option></select>
-                        </div>
-                        <!-- /input-group -->
-                    </div>
-                    <div class="col-lg-1">
-                        <div class="input-group">
-                            <select ng-model="selectedPrcConfianca" class="form-control" ng-options="x for x in prcConfianca"><option value="">-</option> </select>
-                        </div>
-                        <!-- /input-group -->
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="input-group">
-                            <select ng-model="selectedTpTreinamento" class="form-control" ng-options="x for x in tpTreinamento"><option value="">-</option> </select>
+                            <select ng-model="selectedPrcConfianca" style="width: 100px;" class="form-control" ng-options="x for x in prcConfianca"><option value="">-</option> </select>
+                            <select ng-model="selectedTpTreinamento" style="width: 100px;" class="form-control" ng-options="x for x in tpTreinamento"><option value="">-</option> </select>
                         </div>
                         <!-- /input-group -->
                     </div>
                     <!-- /.col-lg-6 -->
-                    <div class="col-lg-2">
+                    <div class="col-lg-4">
                         <div class="input-group">
                           <span class="input-group-addon">
                             <label>Treinamento</label>
                           </span>
-                            <select ng-model="selectedOpcaoTreinamento"  class="form-control" ng-options="x for x in opcaoTreinamento"><option value="">-</option> </select>
+                            <select ng-model="selectedOpcaoTreinamento" style="width: 100px;" class="form-control" ng-options="x for x in opcaoTreinamento"><option value="">-</option> </select>
                         </div>
                         <!-- /input-group -->
                     </div>
@@ -198,7 +184,7 @@
                             </a></div>
                         </th>
                         <th>% Confiança Intenção
-                            <div><a href="#" ng-click="sort_by('confidenceIntencao')">
+                            <div style="text-align: center;"><a href="#" ng-click="sort_by('confidenceIntencao')">
                                 % Confiança Intenção
                                 <span ng-show="showDown('confidenceIntencao')" class="fa fa-caret-down"></span>
                                 <span ng-show="showUp('confidenceIntencao')" class="fa fa-caret-up"></span>
@@ -212,7 +198,7 @@
                             </a></div>
                         </th>
                         <th>% Confiança Entidade
-                            <div><a href="#" ng-click="sort_by('confidenceEntidade')">
+                            <div style="text-align: center;"><a href="#" ng-click="sort_by('confidenceEntidade')">
                                 % Confiança Entidade
                                 <span ng-show="showDown('confidenceEntidade')" class="fa fa-caret-down"></span>
                                 <span ng-show="showUp('confidenceEntidade')" class="fa fa-caret-up"></span>
@@ -232,7 +218,7 @@
                                 <span ng-show="showUp('data')" class="fa fa-caret-up"></span>
                             </a></div>
                         </th>
-                        <th>Status<div><a href="#">
+                        <th>Status<div style="text-align: center;"><a href="#">
                             Status</a></div></th>
                     </tr>
                     </thead>
@@ -244,12 +230,12 @@
                             </td>
                             <td>{{item.conversation_id}}</td>
                             <td>{{item.msgUser}}</td>
-                            <td >{{item.confidenceIntencao}} <span ng-show="isNumber(item.confidenceIntencao)">%</span></td>
+                            <td style="text-align: center;">{{item.confidenceIntencao}} <span ng-show="isNumber(item.confidenceIntencao)">%</span></td>
                             <td>{{item.intencao}}</td>
-                            <td >{{item.confidenceEntidade}} <span ng-show="isNumber(item.confidenceEntidade)">%</span></td>
+                            <td style="text-align: center;">{{item.confidenceEntidade}} <span ng-show="isNumber(item.confidenceEntidade)">%</span></td>
                             <td>{{item.entidade}}</td>
                             <td>{{item.data}}</td>
-                            <td><span ng-show="{{item.treinado}}" class="fa fa-check" aria-hidden="true"> </span></td>
+                            <td style="text-align: center;"><span ng-show="{{item.treinado}}" class="fa fa-check" aria-hidden="true"> </span></td>
                             <!--<td>{{item.id}}</td>-->
                         </tr>
                     </tbody>
@@ -313,18 +299,11 @@
         </div>
         <div class="modal-body" id="modal-body1">
             <div class="form-group">
-                <div>
-                    <label>Intenção</label>
-                    <select ng-model="selectedIntencao" class="form-control">
-                        <option value="">-- selecione a intenção --</option>
-                        <option ng-repeat="x in $ctrl.intencoes" value="{{x.descricao}}">{{x.descricao}}</option>
-                    </select>
-                </div>
-                <br/>
-                <div  style="text-align: left;">
-                    <label>Mensagem:</label>
-                    <span>{{$ctrl.mensagemIntencao}}</span>
-                </div>
+                <label>Intenção</label>
+                <select ng-model="selectedIntencao" class="form-control">
+                    <option value="">-- selecione a intenção --</option>
+                    <option ng-repeat="x in $ctrl.intencoes" value="{{x.descricao}}">{{x.descricao}}</option>
+                </select>
                 <div class="alert alert-success" role="alert" ng-if="$ctrl.sucessoMessage">{{$ctrl.sucessoMessage}}</div>
                 <div class="alert alert-danger" role="alert" ng-if="$ctrl.errorMessage">{{$ctrl.errorMessage}}</div>
             </div>
@@ -426,9 +405,9 @@
         });
 
         $(function(){
-          $('.box_limiteAltura') .css({'height': (($(window).height()) - 380)+'px'});
+          $('.box_limiteAltura') .css({'height': (($(window).height()) - 300)+'px'});
           $(window).bind('resize', function(){
-            $('.box_limiteAltura') .css({'height': (($(window).height()) - 380)+'px'});
+            $('.box_limiteAltura') .css({'height': (($(window).height()) - 300)+'px'});
           });
         });
    </script>

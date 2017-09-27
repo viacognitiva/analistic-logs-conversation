@@ -26,6 +26,7 @@ a:hover, a:active, a:focus {
 }
 .main-header .logo{
     height:70px;
+    position:absolute;
 }
 .navbar-nav{
     margin:10px 0;
@@ -40,6 +41,10 @@ a:hover, a:active, a:focus {
 }
 .btn-primary:hover, .btn-primary:active, .btn-primary.hover {
     background-color: #444;
+}
+.btn-primary.direita{
+    float:right;
+    margin-left: 5px
 }
 .btn-warning{
     border:none;
@@ -67,10 +72,14 @@ a:hover, a:active, a:focus {
 .box.box-primary {
     border-top-color: #fcf1f0;
 }
-.content-header>h1{
+.titulo{
     color: #7c903d;
     font-weight:bold;
-    font-size:30px
+    font-size:30px;
+    position:absolute;
+    left:50%;
+    top:12px;
+    margin-left:-190px;
 }
 .skin-blue .main-header li.user-header{
     background-color: #a81f42;
