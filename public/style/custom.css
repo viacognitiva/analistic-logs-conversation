@@ -18,6 +18,9 @@ a:hover, a:active, a:focus {
 .login-page, .register-page {
     background: #fcf1f0;
 }
+.login-logo{
+    font-size:27px
+}
 .login-logo a, .register-logo a{
     color: #a81f42;
 }
@@ -31,7 +34,7 @@ a:hover, a:active, a:focus {
 .navbar-nav{
     margin:10px 0;
 }
-.btn-primary, .btn-primary:focus,.btn-primary:active{
+.btn-primary, .btn-primary:focus,.btn-primary:active, .btn-primary[disabled]:hover{
     color: #fff;
     background-color: #A81F42;
     border:none;
