@@ -299,11 +299,18 @@
         </div>
         <div class="modal-body" id="modal-body1">
             <div class="form-group">
-                <label>Intenção</label>
-                <select ng-model="selectedIntencao" class="form-control">
-                    <option value="">-- selecione a intenção --</option>
-                    <option ng-repeat="x in $ctrl.intencoes" value="{{x.descricao}}">{{x.descricao}}</option>
-                </select>
+                <div>
+                    <label>Intenção</label>
+                    <select ng-model="selectedIntencao" class="form-control">
+                        <option value="">-- selecione a intenção --</option>
+                        <option ng-repeat="x in $ctrl.intencoes" value="{{x.descricao}}">{{x.descricao}}</option>
+                    </select>
+                </div>
+                <br/>
+                <div  style="text-align: left;">
+                    <label>Mensagem:</label>
+                    <span>{{$ctrl.mensagemIntencao}}</span>
+                </div>
                 <div class="alert alert-success" role="alert" ng-if="$ctrl.sucessoMessage">{{$ctrl.sucessoMessage}}</div>
                 <div class="alert alert-danger" role="alert" ng-if="$ctrl.errorMessage">{{$ctrl.errorMessage}}</div>
             </div>
