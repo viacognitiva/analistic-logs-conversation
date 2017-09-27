@@ -205,6 +205,21 @@ app.controller('ModalInstanceCtrl', ['$scope','$uibModalInstance','$http',functi
 
             });
        } else if ($scope.parametro=='intencao'){
+
+             try {
+                   angular.forEach($scope.selection, function(sel){
+                          angular.forEach($scope.items, function(item){
+                                if(item.id==sel){
+                                  $ctrl.mensagemIntencao=item.msgUser;
+                                  throw Error();//usado para simular o break, pra não iterar toda lista quando encontrado
+                                }//fim do if
+                           });
+                   });
+
+               } catch(e) {
+                   // anything
+               }
+              limpar();
              $http.get('/api/logconversation/intencoes').then(function(response) {
                 var retorno = [];
                 var data = response.data;
