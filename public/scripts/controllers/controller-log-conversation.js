@@ -7,6 +7,9 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
             $scope.sortReverse  = true;  // set the default sort order
             $scope.searchFish   = '';     // set the default search/filter term
 
+            $scope.disableBtnTreinarIntencao = true;
+            $scope.disableBtnTreinarEntidade = true;
+
             $scope.opcaoTreinamento = ["Sim", "Não"];
             $scope.tpTreinamento = ["Intenção", "Entidade"];
             $scope.prcConfianca = ["10", "20","30","40","50","60","70","80","90","100"];
@@ -95,6 +98,7 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
 
              // Toggle selection
              $scope.toggleSelection = function (id) {
+
                    var idx = $scope.selection.indexOf(id);
                    // Is currently selected
                    if (idx > -1) {
@@ -102,6 +106,15 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                    } // Is newly selected
                    else {
                      $scope.selection.push(id);
+                   }
+
+                   if($scope.selection.length>0){
+                     $scope.disableBtnTreinarIntencao = false;
+                     $scope.disableBtnTreinarEntidade = false;
+
+                   } else {
+                      $scope.disableBtnTreinarIntencao = true;
+                      $scope.disableBtnTreinarEntidade = true;
                    }
              };
 
