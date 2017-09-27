@@ -40,7 +40,7 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
 
                           if(item.response.context.conversation_id.length!=0){
                             jsonParam.conversation_id = item.response.context.conversation_id;
-                            jsonParam.data = $filter('date')(item.response_timestamp, "dd-MM-yyyy HH:mm:ss");
+                            jsonParam.data = $filter('date')(item.response_timestamp, "dd/MM/yyyy HH:mm:ss");
                             jsonParam.id=item.log_id;
                             jsonParam.treinado=item.treinado;
                           }
