@@ -29,12 +29,12 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                           angular.forEach(item.response.entities, function(ent){
                                jsonParam.entidade = ent.entity;
                                //jsonParam.confidenceEntidade = (ent.confidence*100).toFixed(1)+" %";
-                               jsonParam.confidenceEntidade = ent.confidence.toFixed(4)*100 ;
+                               jsonParam.confidenceEntidade =parseFloat((ent.confidence*100).toFixed(2)) ;
                           });
                           angular.forEach(item.response.intents, function(int){
                              jsonParam.intencao = int.intent;
                             // jsonParam.confidenceIntencao = (int.confidence*100).toFixed(1) +" %";
-                            jsonParam.confidenceIntencao = int.confidence.toFixed(4)*100 ;
+                            jsonParam.confidenceIntencao = parseFloat((int.confidence*100).toFixed(2)) ;
                           });
 
                           angular.forEach(item.response.input, function(text){
