@@ -87,8 +87,12 @@ a:hover, a:active, a:focus {
 .skin-blue .main-header li.user-header{
     background-color: #a81f42;
 }
+
 .table{
   margin-bottom:0;
+}
+.teste{
+    display:none
 }
 .tabela {
   position: relative;
