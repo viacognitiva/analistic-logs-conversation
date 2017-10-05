@@ -197,6 +197,35 @@
 
 
          },
+         getPrcCuracidade: function (req, res){
+
+              db = cloudantDB.db.use('log-treinamento-abrale');
+
+              db.index( {name:'_id', type:'json', index:{fields:['ativo']}});
+
+              var jsonParam = {};
+              var query = { selector: { ativo: true }};
+              db.find(query, function(err, data) {
+                    if (err) {
+                           return console.log('[db.getLogTreinamento] ', err.message);
+                       }
+                     jsonParam.x=data.docs.length;
+
+                     var query2 = { selector: { treinado: true }};
+                     db.find(query2, function(err1, data1) {
+                            if (err1) {
+                                   return console.log('[db.getLogTreinamento] ', err1.message);
+                               }
+
+                                 jsonParam.y=data1.docs.length;
+                                 var text = '{ "curacidade" : '+(jsonParam.x/jsonParam.y)+'}';
+                                 var obj1 = JSON.parse(text);
+                                 res.status(200).json(obj1);
+
+                      });
+
+              });
+         },
          getLogTreinamento: function (req, res){
               db = cloudantDB.db.use('log-treinamento-abrale');
 
