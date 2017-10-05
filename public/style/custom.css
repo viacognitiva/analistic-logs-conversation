@@ -45,9 +45,14 @@ a:hover, a:active, a:focus {
 .btn-primary:hover, .btn-primary:active, .btn-primary.hover {
     background-color: #444;
 }
-.btn-primary.direita{
+.btn-primary.direita {
     float:right;
     margin-left: 5px
+}
+.curacidade{
+    float:right;
+    margin-top: 6px;
+    margin-right: 20px;
 }
 .btn-warning{
     border:none;
