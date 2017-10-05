@@ -194,6 +194,11 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                           $scope.usuariologado = data.username;
                      });
 
+                     $http.get('/api/logconversation/curacidade').then(function(response) {
+                           var data = response.data;
+                           $scope.curacidade = data.curacidade;
+                      });
+
                  };
 
 

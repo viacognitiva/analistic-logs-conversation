@@ -116,6 +116,10 @@
                 <div >
                     <button ng-click="buscar()" class="btn btn-primary">  <i class="fa fa-search"></i>  Buscar</button>
                     <!--<button ng-click="aplicar()" class="btn btn-info pull-right">Aplicar</button>-->
+                    <span class="direita" >
+                            <label>Curacidade:</label>
+                        <label>{{curacidade}} %</label>
+                          </span>
                     <button ng-click="modalEntidade('lg','entidade')" class="btn btn-primary direita" ng-disabled="disableBtnTreinarEntidade">Treinar Entidade</button>
                     <button ng-click="modalIntencao('lg','intencao')" class="btn btn-primary direita" ng-disabled="disableBtnTreinarIntencao">Treinar Intenção</button>
                 </div>
