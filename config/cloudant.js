@@ -164,7 +164,7 @@
 
             var fullUrl = protocol + "://localhost:"+app.get('port')+"/api/logconversation/";
 
-            console.log(fullUrl);
+            //console.log(fullUrl);
 
            request.get(fullUrl,function(err,resp,body){
 
@@ -174,17 +174,22 @@
 
                   var dataLog = JSON.parse(body);
 
-                  console.log(dataLog.logs.length);
-
                   db = cloudantDB.db.use('log-treinamento-abrale');
+
+                  var cpDataLog = [];
 
                   for(var i = 0; i < dataLog.logs.length;i++){
                       dataLog.logs[i]._id=dataLog.logs[i].request_timestamp+"_"+dataLog.logs[i].request.input.text;
                       dataLog.logs[i].treinado=false;
                       dataLog.logs[i].ativo=true;
+
+                      if(dataLog.logs[i].request.input.text.length!=0){
+                        cpDataLog.push(dataLog.logs[i]);
+                      }
                   }
+
                   // operations(update/delete/insert) on the database em batch
-                  db.bulk({docs:dataLog.logs}, function(err, body) {
+                  db.bulk({docs:cpDataLog}, function(err, body) {
                     console.log(body);
                   });
 
