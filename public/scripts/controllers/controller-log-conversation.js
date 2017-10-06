@@ -188,7 +188,7 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
                  };
 
                  $scope.inicializa = function(){
-                     //$scope.usuariologado = "Rafaeil";
+
                      $http.get('/api/getUserAutenticado').then(function(response) {
                           var data = response.data;
                           $scope.usuariologado = data.username;
@@ -196,14 +196,13 @@ app.controller('myController', ['$scope', '$log', '$http','$filter','$uibModal',
 
                      $http.get('/api/logconversation/curacidade').then(function(response) {
                            var data = response.data;
-                           $scope.curacidade = data.curacidade;
+                           $scope.curacidade = parseFloat(data.curacidade.toFixed(2));
                       });
 
                  };
 
 
 }]);
-
 
 app.filter('filterTreinamento', function() {
     return function( items, treinado ) {
