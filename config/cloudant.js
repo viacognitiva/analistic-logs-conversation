@@ -218,7 +218,7 @@
                                }
 
                                  jsonParam.y=data1.docs.length;
-                                 var text = '{ "curacidade" : '+(jsonParam.x/jsonParam.y)+'}';
+                                 var text = '{ "curacidade" : '+((jsonParam.y/jsonParam.x)*100)+'}';
                                  var obj1 = JSON.parse(text);
                                  res.status(200).json(obj1);
 
